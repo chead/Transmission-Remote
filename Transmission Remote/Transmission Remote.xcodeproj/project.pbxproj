@@ -1,0 +1,661 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C23D02CC2492EB7D00B5D598 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D02CB2492EB7D00B5D598 /* LandingViewController.swift */; };
+		C24A103D245C994E0023D242 /* Transmission_Remote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C24A103B245C994E0023D242 /* Transmission_Remote.xcdatamodeld */; };
+		C251B3732244541500B2AA04 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C251B3722244541500B2AA04 /* AppDelegate.swift */; };
+		C251B3782244541500B2AA04 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C251B3762244541500B2AA04 /* Main.storyboard */; };
+		C251B37D2244541800B2AA04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C251B37C2244541800B2AA04 /* Assets.xcassets */; };
+		C251B3802244541800B2AA04 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C251B37E2244541800B2AA04 /* LaunchScreen.storyboard */; };
+		C251B38B2244541800B2AA04 /* Transmission_RemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C251B38A2244541800B2AA04 /* Transmission_RemoteTests.swift */; };
+		C251B3962244541800B2AA04 /* Transmission_RemoteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C251B3952244541800B2AA04 /* Transmission_RemoteUITests.swift */; };
+		C25DBA6F24968AB2009E6458 /* TransmissionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25DBA6E24968AB2009E6458 /* TransmissionService.swift */; };
+		C270A32D245127C500A1629B /* TransmissionServicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C270A32C245127C500A1629B /* TransmissionServicesTableViewController.swift */; };
+		C270A32F245127CE00A1629B /* TransmissionTorrentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C270A32E245127CE00A1629B /* TransmissionTorrentsTableViewController.swift */; };
+		C288164324F8AF9A002DFC9C /* AddTransmissionServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288164224F8AF9A002DFC9C /* AddTransmissionServiceViewController.swift */; };
+		C288164824FA0952002DFC9C /* TransmissionKit in Frameworks */ = {isa = PBXBuildFile; productRef = C288164724FA0952002DFC9C /* TransmissionKit */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C251B3872244541800B2AA04 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C251B3672244541400B2AA04 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C251B36E2244541400B2AA04;
+			remoteInfo = "Transmission Remote";
+		};
+		C251B3922244541800B2AA04 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C251B3672244541400B2AA04 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C251B36E2244541400B2AA04;
+			remoteInfo = "Transmission Remote";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C251B3A62244554700B2AA04 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		C23D02CB2492EB7D00B5D598 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
+		C24A103C245C994E0023D242 /* Transmission_Remote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Transmission_Remote.xcdatamodel; sourceTree = "<group>"; };
+		C251B36F2244541500B2AA04 /* Transmission Remote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Transmission Remote.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C251B3722244541500B2AA04 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C251B3772244541500B2AA04 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C251B37C2244541800B2AA04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C251B37F2244541800B2AA04 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C251B3812244541800B2AA04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C251B3862244541800B2AA04 /* Transmission RemoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Transmission RemoteTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C251B38A2244541800B2AA04 /* Transmission_RemoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transmission_RemoteTests.swift; sourceTree = "<group>"; };
+		C251B38C2244541800B2AA04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C251B3912244541800B2AA04 /* Transmission RemoteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Transmission RemoteUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C251B3952244541800B2AA04 /* Transmission_RemoteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transmission_RemoteUITests.swift; sourceTree = "<group>"; };
+		C251B3972244541800B2AA04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C25DBA6E24968AB2009E6458 /* TransmissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionService.swift; sourceTree = "<group>"; };
+		C270A32C245127C500A1629B /* TransmissionServicesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionServicesTableViewController.swift; sourceTree = "<group>"; };
+		C270A32E245127CE00A1629B /* TransmissionTorrentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionTorrentsTableViewController.swift; sourceTree = "<group>"; };
+		C288164224F8AF9A002DFC9C /* AddTransmissionServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransmissionServiceViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C251B36C2244541400B2AA04 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C288164824FA0952002DFC9C /* TransmissionKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C251B3832244541800B2AA04 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C251B38E2244541800B2AA04 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C251B3662244541400B2AA04 = {
+			isa = PBXGroup;
+			children = (
+				C251B3712244541500B2AA04 /* Transmission Remote */,
+				C251B3892244541800B2AA04 /* Transmission RemoteTests */,
+				C251B3942244541800B2AA04 /* Transmission RemoteUITests */,
+				C251B3702244541500B2AA04 /* Products */,
+				C288164624FA0952002DFC9C /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		C251B3702244541500B2AA04 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C251B36F2244541500B2AA04 /* Transmission Remote.app */,
+				C251B3862244541800B2AA04 /* Transmission RemoteTests.xctest */,
+				C251B3912244541800B2AA04 /* Transmission RemoteUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C251B3712244541500B2AA04 /* Transmission Remote */ = {
+			isa = PBXGroup;
+			children = (
+				C23D02CB2492EB7D00B5D598 /* LandingViewController.swift */,
+				C25DBA6E24968AB2009E6458 /* TransmissionService.swift */,
+				C288164224F8AF9A002DFC9C /* AddTransmissionServiceViewController.swift */,
+				C270A32C245127C500A1629B /* TransmissionServicesTableViewController.swift */,
+				C270A32E245127CE00A1629B /* TransmissionTorrentsTableViewController.swift */,
+				C251B3722244541500B2AA04 /* AppDelegate.swift */,
+				C251B3762244541500B2AA04 /* Main.storyboard */,
+				C251B37C2244541800B2AA04 /* Assets.xcassets */,
+				C251B37E2244541800B2AA04 /* LaunchScreen.storyboard */,
+				C251B3812244541800B2AA04 /* Info.plist */,
+				C24A103B245C994E0023D242 /* Transmission_Remote.xcdatamodeld */,
+			);
+			path = "Transmission Remote";
+			sourceTree = "<group>";
+		};
+		C251B3892244541800B2AA04 /* Transmission RemoteTests */ = {
+			isa = PBXGroup;
+			children = (
+				C251B38A2244541800B2AA04 /* Transmission_RemoteTests.swift */,
+				C251B38C2244541800B2AA04 /* Info.plist */,
+			);
+			path = "Transmission RemoteTests";
+			sourceTree = "<group>";
+		};
+		C251B3942244541800B2AA04 /* Transmission RemoteUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C251B3952244541800B2AA04 /* Transmission_RemoteUITests.swift */,
+				C251B3972244541800B2AA04 /* Info.plist */,
+			);
+			path = "Transmission RemoteUITests";
+			sourceTree = "<group>";
+		};
+		C288164624FA0952002DFC9C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C251B36E2244541400B2AA04 /* Transmission Remote */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C251B39A2244541800B2AA04 /* Build configuration list for PBXNativeTarget "Transmission Remote" */;
+			buildPhases = (
+				C251B36B2244541400B2AA04 /* Sources */,
+				C251B36C2244541400B2AA04 /* Frameworks */,
+				C251B36D2244541400B2AA04 /* Resources */,
+				C251B3A62244554700B2AA04 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Transmission Remote";
+			packageProductDependencies = (
+				C288164724FA0952002DFC9C /* TransmissionKit */,
+			);
+			productName = "Transmission Remote";
+			productReference = C251B36F2244541500B2AA04 /* Transmission Remote.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C251B3852244541800B2AA04 /* Transmission RemoteTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C251B39D2244541800B2AA04 /* Build configuration list for PBXNativeTarget "Transmission RemoteTests" */;
+			buildPhases = (
+				C251B3822244541800B2AA04 /* Sources */,
+				C251B3832244541800B2AA04 /* Frameworks */,
+				C251B3842244541800B2AA04 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C251B3882244541800B2AA04 /* PBXTargetDependency */,
+			);
+			name = "Transmission RemoteTests";
+			productName = "Transmission RemoteTests";
+			productReference = C251B3862244541800B2AA04 /* Transmission RemoteTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C251B3902244541800B2AA04 /* Transmission RemoteUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C251B3A02244541800B2AA04 /* Build configuration list for PBXNativeTarget "Transmission RemoteUITests" */;
+			buildPhases = (
+				C251B38D2244541800B2AA04 /* Sources */,
+				C251B38E2244541800B2AA04 /* Frameworks */,
+				C251B38F2244541800B2AA04 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C251B3932244541800B2AA04 /* PBXTargetDependency */,
+			);
+			name = "Transmission RemoteUITests";
+			productName = "Transmission RemoteUITests";
+			productReference = C251B3912244541800B2AA04 /* Transmission RemoteUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C251B3672244541400B2AA04 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = chead;
+				TargetAttributes = {
+					C251B36E2244541400B2AA04 = {
+						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1140;
+					};
+					C251B3852244541800B2AA04 = {
+						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1140;
+						TestTargetID = C251B36E2244541400B2AA04;
+					};
+					C251B3902244541800B2AA04 = {
+						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1140;
+						TestTargetID = C251B36E2244541400B2AA04;
+					};
+				};
+			};
+			buildConfigurationList = C251B36A2244541400B2AA04 /* Build configuration list for PBXProject "Transmission Remote" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C251B3662244541400B2AA04;
+			productRefGroup = C251B3702244541500B2AA04 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C251B36E2244541400B2AA04 /* Transmission Remote */,
+				C251B3852244541800B2AA04 /* Transmission RemoteTests */,
+				C251B3902244541800B2AA04 /* Transmission RemoteUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C251B36D2244541400B2AA04 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C251B3802244541800B2AA04 /* LaunchScreen.storyboard in Resources */,
+				C251B37D2244541800B2AA04 /* Assets.xcassets in Resources */,
+				C251B3782244541500B2AA04 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C251B3842244541800B2AA04 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C251B38F2244541800B2AA04 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C251B36B2244541400B2AA04 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C288164324F8AF9A002DFC9C /* AddTransmissionServiceViewController.swift in Sources */,
+				C25DBA6F24968AB2009E6458 /* TransmissionService.swift in Sources */,
+				C24A103D245C994E0023D242 /* Transmission_Remote.xcdatamodeld in Sources */,
+				C270A32D245127C500A1629B /* TransmissionServicesTableViewController.swift in Sources */,
+				C251B3732244541500B2AA04 /* AppDelegate.swift in Sources */,
+				C23D02CC2492EB7D00B5D598 /* LandingViewController.swift in Sources */,
+				C270A32F245127CE00A1629B /* TransmissionTorrentsTableViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C251B3822244541800B2AA04 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C251B38B2244541800B2AA04 /* Transmission_RemoteTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C251B38D2244541800B2AA04 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C251B3962244541800B2AA04 /* Transmission_RemoteUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C251B3882244541800B2AA04 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C251B36E2244541400B2AA04 /* Transmission Remote */;
+			targetProxy = C251B3872244541800B2AA04 /* PBXContainerItemProxy */;
+		};
+		C251B3932244541800B2AA04 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C251B36E2244541400B2AA04 /* Transmission Remote */;
+			targetProxy = C251B3922244541800B2AA04 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C251B3762244541500B2AA04 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C251B3772244541500B2AA04 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		C251B37E2244541800B2AA04 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C251B37F2244541800B2AA04 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C251B3982244541800B2AA04 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C251B3992244541800B2AA04 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C251B39B2244541800B2AA04 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 57XK7UWHV5;
+				INFOPLIST_FILE = "Transmission Remote/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.chead.Transmission-Remote";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		C251B39C2244541800B2AA04 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 57XK7UWHV5;
+				INFOPLIST_FILE = "Transmission Remote/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.chead.Transmission-Remote";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		C251B39E2244541800B2AA04 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 57XK7UWHV5;
+				INFOPLIST_FILE = "Transmission RemoteTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.chead.Transmission-RemoteTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Transmission Remote.app/Transmission Remote";
+			};
+			name = Debug;
+		};
+		C251B39F2244541800B2AA04 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 57XK7UWHV5;
+				INFOPLIST_FILE = "Transmission RemoteTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.chead.Transmission-RemoteTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Transmission Remote.app/Transmission Remote";
+			};
+			name = Release;
+		};
+		C251B3A12244541800B2AA04 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 57XK7UWHV5;
+				INFOPLIST_FILE = "Transmission RemoteUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.chead.Transmission-RemoteUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Transmission Remote";
+			};
+			name = Debug;
+		};
+		C251B3A22244541800B2AA04 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 57XK7UWHV5;
+				INFOPLIST_FILE = "Transmission RemoteUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.chead.Transmission-RemoteUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Transmission Remote";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C251B36A2244541400B2AA04 /* Build configuration list for PBXProject "Transmission Remote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C251B3982244541800B2AA04 /* Debug */,
+				C251B3992244541800B2AA04 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C251B39A2244541800B2AA04 /* Build configuration list for PBXNativeTarget "Transmission Remote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C251B39B2244541800B2AA04 /* Debug */,
+				C251B39C2244541800B2AA04 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C251B39D2244541800B2AA04 /* Build configuration list for PBXNativeTarget "Transmission RemoteTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C251B39E2244541800B2AA04 /* Debug */,
+				C251B39F2244541800B2AA04 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C251B3A02244541800B2AA04 /* Build configuration list for PBXNativeTarget "Transmission RemoteUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C251B3A12244541800B2AA04 /* Debug */,
+				C251B3A22244541800B2AA04 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C288164724FA0952002DFC9C /* TransmissionKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TransmissionKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		C24A103B245C994E0023D242 /* Transmission_Remote.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C24A103C245C994E0023D242 /* Transmission_Remote.xcdatamodel */,
+			);
+			currentVersion = C24A103C245C994E0023D242 /* Transmission_Remote.xcdatamodel */;
+			path = Transmission_Remote.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = C251B3672244541400B2AA04 /* Project object */;
+}
