@@ -134,13 +134,13 @@ class TransmissionServicesTableViewController: UITableViewController, NSFetchedR
         self.selectedTransmissionService = nil
     }
 
-    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        self.selectedTransmissionService = self.fetchedResultsController.object(at: indexPath)
-
-        self.performSegue(withIdentifier: "presentEditTransmissionServiceViewController", sender: self)
-
-        self.selectedTransmissionService = nil
-    }
+//    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+//        self.selectedTransmissionService = self.fetchedResultsController.object(at: indexPath)
+//
+//        self.performSegue(withIdentifier: "presentEditTransmissionServiceViewController", sender: self)
+//
+//        self.selectedTransmissionService = nil
+//    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch(segue.identifier) {
@@ -150,16 +150,16 @@ class TransmissionServicesTableViewController: UITableViewController, NSFetchedR
 
             transmissionServiceViewController.managedObjectContext = self.fetchedResultsController.managedObjectContext
 
-        case "presentEditTransmissionServiceViewController":
-            let transmissionServiceNavigationController = segue.destination as! UINavigationController
-            let transmissionServiceViewController = transmissionServiceNavigationController.viewControllers.first as! EditTransmissionServiceViewController
-
-            transmissionServiceViewController.transmissionService = self.selectedTransmissionService
-
-        case "showTransmissionTorrentsTableViewController":
-            let transmissionTorrentsTableViewController = segue.destination as! TransmissionTorrentsTableViewController
-
-            transmissionTorrentsTableViewController.transmissionService = self.selectedTransmissionService
+//        case "presentEditTransmissionServiceViewController":
+//            let transmissionServiceNavigationController = segue.destination as! UINavigationController
+//            let transmissionServiceViewController = transmissionServiceNavigationController.viewControllers.first as! EditTransmissionServiceViewController
+//
+//            transmissionServiceViewController.transmissionService = self.selectedTransmissionService
+//
+//        case "showTransmissionTorrentsTableViewController":
+//            let transmissionTorrentsTableViewController = segue.destination as! TransmissionTorrentsTableViewController
+//
+//            transmissionTorrentsTableViewController.transmissionService = self.selectedTransmissionService
 
         default:
             break
