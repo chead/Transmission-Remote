@@ -155,11 +155,12 @@ class TransmissionServicesTableViewController: UITableViewController, NSFetchedR
 //            let transmissionServiceViewController = transmissionServiceNavigationController.viewControllers.first as! EditTransmissionServiceViewController
 //
 //            transmissionServiceViewController.transmissionService = self.selectedTransmissionService
-//
-//        case "showTransmissionTorrentsTableViewController":
-//            let transmissionTorrentsTableViewController = segue.destination as! TransmissionTorrentsTableViewController
-//
-//            transmissionTorrentsTableViewController.transmissionService = self.selectedTransmissionService
+
+        case "showTransmissionTorrentsTableViewController":
+            let transmissionTorrentsTableViewController = segue.destination as! TransmissionTorrentsTableViewController
+
+            transmissionTorrentsTableViewController.managedObjectContext = self.managedObjectContext
+            transmissionTorrentsTableViewController.transmissionService = self.selectedTransmissionService
 
         default:
             break

@@ -15,11 +15,12 @@
 		C251B3802244541800B2AA04 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C251B37E2244541800B2AA04 /* LaunchScreen.storyboard */; };
 		C251B38B2244541800B2AA04 /* Transmission_RemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C251B38A2244541800B2AA04 /* Transmission_RemoteTests.swift */; };
 		C251B3962244541800B2AA04 /* Transmission_RemoteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C251B3952244541800B2AA04 /* Transmission_RemoteUITests.swift */; };
-		C25DBA6F24968AB2009E6458 /* TransmissionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25DBA6E24968AB2009E6458 /* TransmissionService.swift */; };
 		C270A32D245127C500A1629B /* TransmissionServicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C270A32C245127C500A1629B /* TransmissionServicesTableViewController.swift */; };
 		C270A32F245127CE00A1629B /* TransmissionTorrentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C270A32E245127CE00A1629B /* TransmissionTorrentsTableViewController.swift */; };
 		C288164324F8AF9A002DFC9C /* AddTransmissionServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288164224F8AF9A002DFC9C /* AddTransmissionServiceViewController.swift */; };
 		C288164824FA0952002DFC9C /* TransmissionKit in Frameworks */ = {isa = PBXBuildFile; productRef = C288164724FA0952002DFC9C /* TransmissionKit */; };
+		C2BF7A7524FE06D9005C0258 /* TransmissionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF7A7424FE06D9005C0258 /* TransmissionService.swift */; };
+		C2BF7A7724FE0818005C0258 /* TransmissionTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF7A7624FE0818005C0258 /* TransmissionTorrent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,10 +68,11 @@
 		C251B3912244541800B2AA04 /* Transmission RemoteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Transmission RemoteUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C251B3952244541800B2AA04 /* Transmission_RemoteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transmission_RemoteUITests.swift; sourceTree = "<group>"; };
 		C251B3972244541800B2AA04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C25DBA6E24968AB2009E6458 /* TransmissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionService.swift; sourceTree = "<group>"; };
 		C270A32C245127C500A1629B /* TransmissionServicesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionServicesTableViewController.swift; sourceTree = "<group>"; };
 		C270A32E245127CE00A1629B /* TransmissionTorrentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionTorrentsTableViewController.swift; sourceTree = "<group>"; };
 		C288164224F8AF9A002DFC9C /* AddTransmissionServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransmissionServiceViewController.swift; sourceTree = "<group>"; };
+		C2BF7A7424FE06D9005C0258 /* TransmissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionService.swift; sourceTree = "<group>"; };
+		C2BF7A7624FE0818005C0258 /* TransmissionTorrent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionTorrent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,7 +126,8 @@
 			isa = PBXGroup;
 			children = (
 				C23D02CB2492EB7D00B5D598 /* LandingViewController.swift */,
-				C25DBA6E24968AB2009E6458 /* TransmissionService.swift */,
+				C2BF7A7424FE06D9005C0258 /* TransmissionService.swift */,
+				C2BF7A7624FE0818005C0258 /* TransmissionTorrent.swift */,
 				C288164224F8AF9A002DFC9C /* AddTransmissionServiceViewController.swift */,
 				C270A32C245127C500A1629B /* TransmissionServicesTableViewController.swift */,
 				C270A32E245127CE00A1629B /* TransmissionTorrentsTableViewController.swift */,
@@ -302,9 +305,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C288164324F8AF9A002DFC9C /* AddTransmissionServiceViewController.swift in Sources */,
-				C25DBA6F24968AB2009E6458 /* TransmissionService.swift in Sources */,
+				C2BF7A7524FE06D9005C0258 /* TransmissionService.swift in Sources */,
 				C24A103D245C994E0023D242 /* Transmission_Remote.xcdatamodeld in Sources */,
 				C270A32D245127C500A1629B /* TransmissionServicesTableViewController.swift in Sources */,
+				C2BF7A7724FE0818005C0258 /* TransmissionTorrent.swift in Sources */,
 				C251B3732244541500B2AA04 /* AppDelegate.swift in Sources */,
 				C23D02CC2492EB7D00B5D598 /* LandingViewController.swift in Sources */,
 				C270A32F245127CE00A1629B /* TransmissionTorrentsTableViewController.swift in Sources */,

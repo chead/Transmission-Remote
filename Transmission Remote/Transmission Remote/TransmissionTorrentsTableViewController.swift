@@ -7,26 +7,40 @@
 //
 
 import UIKit
+import CoreData
 import TransmissionKit
 
-class TransmissionTorrentsTableViewController: UITableViewController {
-
+class TransmissionTorrentsTableViewController: UITableViewController , NSFetchedResultsControllerDelegate{
+    var managedObjectContext: NSManagedObjectContext!
     var transmissionService: TransmissionService!
+
     private var transmissionClient: TransmissionKit.Client?
+
+    lazy var fetchedResultsController: NSFetchedResultsController<TransmissionTorrent> = {
+        let transissionServersFetchRequest: NSFetchRequest<TransmissionTorrent> = NSFetchRequest(entityName: "TransmissionTorrent")
+
+        transissionServersFetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+
+        var fetchedResultsController = NSFetchedResultsController(fetchRequest: transissionServersFetchRequest,
+                                                                  managedObjectContext: self.transmissionService.managedObjectContext!,
+                                                                  sectionNameKeyPath: nil,
+                                                                  cacheName: nil)
+
+        fetchedResultsController.delegate = self
+
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            fatalError("Failed to initialize FetchedResultsController: \(error)")
+        }
+
+        return fetchedResultsController
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.transmissionClient = Client(host: self.transmissionService.host, port: self.transmissionService.port, credentials: nil)
-
-        self.transmissionClient?.make(request: Torrents.getTorrents(), completion: { (result) in
-            switch result {
-            case .success(let result):
-                print(result.arguments.torrents.count)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        })
+        self.transmissionService.refreshTorrents { (error) in }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -37,58 +51,63 @@ class TransmissionTorrentsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return self.fetchedResultsController.sections!.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        let sections = self.fetchedResultsController.sections!
+        let sectionInfo = sections[section]
+
+        return sectionInfo.numberOfObjects
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "transmissionTorrentTableViewCell", for: indexPath)
 
-        // Configure the cell...
+        let transmissionTorrent = self.fetchedResultsController.object(at: indexPath)
+
+        cell.textLabel?.text = transmissionTorrent.name
 
         return cell
     }
-    */
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
     }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    //    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+    //        switch type {
+    //        case .insert:
+    //            tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+    //        case .delete:
+    //            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+    //        case .move:
+    //            break
+    //        case .update:
+    //            break
+    //        @unknown default:
+    //            fatalError()
+    //        }
+    //    }
+
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+        case .update:
+            tableView.reloadRows(at: [indexPath!], with: .fade)
+        case .move:
+            tableView.moveRow(at: indexPath!, to: newIndexPath!)
+        @unknown default:
+            fatalError()
+        }
     }
-    */
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
     }
-    */
 
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
 }

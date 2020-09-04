@@ -2,12 +2,19 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="TransmissionService" representedClassName="TransmissionService" syncable="YES">
         <attribute name="created" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="host" optional="YES" attributeType="String"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="host" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
         <attribute name="port" attributeType="String"/>
         <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="torrents" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TransmissionTorrent" inverseName="service" inverseEntity="TransmissionTorrent"/>
+    </entity>
+    <entity name="TransmissionTorrent" representedClassName="TransmissionTorrent" syncable="YES">
+        <attribute name="id" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <relationship name="service" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TransmissionService" inverseName="torrents" inverseEntity="TransmissionService"/>
     </entity>
     <elements>
-        <element name="TransmissionService" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="TransmissionService" positionX="-134.2578125" positionY="-216.19921875" width="128" height="133"/>
+        <element name="TransmissionTorrent" positionX="70.71484375" positionY="-131.453125" width="128" height="88"/>
     </elements>
 </model>
