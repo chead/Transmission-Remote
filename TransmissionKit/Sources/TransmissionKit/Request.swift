@@ -8,9 +8,9 @@
 import Foundation
 
 public struct Request<Arguments: Encodable, Model>: Encodable {
-    let method: String
-    let arguments: Arguments
-    var tag: Int
+    public let method: String
+    public let arguments: Arguments
+    public let tag: Int
 
     init(method: String, arguments: Arguments, tag: Int) {
         self.method = method

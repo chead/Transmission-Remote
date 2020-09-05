@@ -21,7 +21,15 @@ public class TransmissionService: NSManagedObject {
     @NSManaged var torrents: Set<TransmissionTorrent>
 
     func refreshTorrents(completion: (Error?) -> Void) {
-        let transmissionClient = Client(host: host, port: port, credentials: nil)
+        var credentials: Credentials?
+
+        if let receivedData = Keychain.load(key: self.uuid.uuidString) {
+            do {
+                credentials = try JSONDecoder().decode(Credentials.self, from: receivedData)
+            } catch {}
+        }
+
+        let transmissionClient = Client(host: host, port: port, credentials: credentials)
 
         transmissionClient.make(request: Torrents.getTorrents(), completion: { (result) in
             switch result {

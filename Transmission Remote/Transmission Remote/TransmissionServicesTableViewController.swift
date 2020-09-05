@@ -61,7 +61,7 @@ class TransmissionServicesTableViewController: UITableViewController, NSFetchedR
 
         let transmissionService = self.fetchedResultsController.object(at: indexPath)
 
-        cell.textLabel?.text = transmissionService.uuid.uuidString
+        cell.textLabel?.text = transmissionService.name
 
         return cell
     }

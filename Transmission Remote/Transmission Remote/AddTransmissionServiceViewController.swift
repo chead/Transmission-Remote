@@ -8,11 +8,14 @@
 
 import UIKit
 import CoreData
+import TransmissionKit
 
 class AddTransmissionServiceViewController: UIViewController {
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var hostTextField: UITextField!
     @IBOutlet var portTextField: UITextField!
+    @IBOutlet var usernameTextField: UITextField!
+    @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var cancelBarButtonItem: UIBarButtonItem!
     @IBOutlet var doneBarButtonItem: UIBarButtonItem!
 
@@ -49,6 +52,23 @@ class AddTransmissionServiceViewController: UIViewController {
             try self.managedObjectContext.save()
         } catch {
             fatalError("Failed to save NSManagedObjectContext: \(error.localizedDescription)")
+        }
+
+        if
+            let username = self.usernameTextField.text,
+            let password = self.passwordTextField.text,
+            username.isEmpty == false,
+            password.isEmpty == false
+        {
+            let credentials = Credentials(username: username, password: password)
+
+            do {
+                let credentialsData = try JSONEncoder().encode(credentials)
+
+                _ = Keychain.save(key: transmissionService.uuid.uuidString, data: credentialsData)
+            } catch {
+                fatalError("Failed to encode credentials: \(error.localizedDescription)")
+            }
         }
 
         self.dismiss(animated: true) {}

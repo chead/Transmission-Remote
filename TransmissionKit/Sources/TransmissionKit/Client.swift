@@ -7,22 +7,18 @@
 //
 
 import Foundation
-public struct Credentials {
-    let username: String
-    let password: String
-}
 
 public final class Client {
-    enum ClientError: Swift.Error {
+    public enum ClientError: Swift.Error {
         case tag
         case identifier
         case unknown
     }
 
-    let host: String
-    let port: String
-    var identifier: String?
-    let credentials: Credentials?
+    public let host: String
+    public let port: String
+    public var identifier: String?
+    public let credentials: Credentials?
     let urlSession: URLSession
 
     public init(host: String, port: String, credentials: Credentials?, urlSession: URLSession) {
@@ -105,6 +101,9 @@ public final class Client {
                     } catch(let error) {
                         completion(.failure(error))
                     }
+
+                case 401:
+                    break
 
                 default:
                     completion(.failure(ClientError.unknown))
