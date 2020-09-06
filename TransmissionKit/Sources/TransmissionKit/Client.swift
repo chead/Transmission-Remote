@@ -10,8 +10,9 @@ import Foundation
 
 public final class Client {
     public enum ClientError: Swift.Error {
-        case tag
-        case identifier
+        case badTag
+        case badIdentifier
+        case authenticationFailed
         case unknown
     }
 
@@ -76,7 +77,7 @@ public final class Client {
                     guard
                         let identifier = httpURLResponse.allHeaderFields["X-Transmission-Session-Id"] as? String
                     else {
-                        completion(.failure(ClientError.identifier))
+                        completion(.failure(ClientError.badIdentifier))
 
                         break
                     }
@@ -86,7 +87,7 @@ public final class Client {
                     if retry == true {
                         self.make(request: request, retry: false, completion: completion)
                     } else {
-                        completion(.failure(ClientError.identifier))
+                        completion(.failure(ClientError.badIdentifier))
                     }
 
                 case 200:
@@ -96,7 +97,7 @@ public final class Client {
                         if response.tag == request.tag {
                             completion(.success(response))
                         } else {
-                            completion(.failure(ClientError.tag))
+                            completion(.failure(ClientError.badTag))
                         }
                     } catch(let error) {
                         completion(.failure(error))

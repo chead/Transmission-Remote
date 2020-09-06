@@ -57,11 +57,11 @@ class TransmissionTorrentsTableViewController: UITableViewController , NSFetched
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "transmissionTorrentTableViewCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "transmissionTorrentTableViewCell", for: indexPath) as! TransmissionTorrentsTableViewCell
 
         let transmissionTorrent = self.fetchedResultsController.object(at: indexPath)
 
-        cell.textLabel?.text = transmissionTorrent.name
+        cell.title.text = transmissionTorrent.name
 
         return cell
     }

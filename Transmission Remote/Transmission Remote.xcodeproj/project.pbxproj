@@ -16,6 +16,7 @@
 		C251B38B2244541800B2AA04 /* Transmission_RemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C251B38A2244541800B2AA04 /* Transmission_RemoteTests.swift */; };
 		C251B3962244541800B2AA04 /* Transmission_RemoteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C251B3952244541800B2AA04 /* Transmission_RemoteUITests.swift */; };
 		C266E52825033C42002E35DA /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C266E52725033C42002E35DA /* Keychain.swift */; };
+		C266E52C2503614F002E35DA /* TransmissionTorrentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C266E52B2503614F002E35DA /* TransmissionTorrentsTableViewCell.swift */; };
 		C270A32D245127C500A1629B /* TransmissionServicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C270A32C245127C500A1629B /* TransmissionServicesTableViewController.swift */; };
 		C270A32F245127CE00A1629B /* TransmissionTorrentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C270A32E245127CE00A1629B /* TransmissionTorrentsTableViewController.swift */; };
 		C288164324F8AF9A002DFC9C /* AddTransmissionServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288164224F8AF9A002DFC9C /* AddTransmissionServiceViewController.swift */; };
@@ -70,6 +71,7 @@
 		C251B3952244541800B2AA04 /* Transmission_RemoteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transmission_RemoteUITests.swift; sourceTree = "<group>"; };
 		C251B3972244541800B2AA04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C266E52725033C42002E35DA /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		C266E52B2503614F002E35DA /* TransmissionTorrentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionTorrentsTableViewCell.swift; sourceTree = "<group>"; };
 		C270A32C245127C500A1629B /* TransmissionServicesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionServicesTableViewController.swift; sourceTree = "<group>"; };
 		C270A32E245127CE00A1629B /* TransmissionTorrentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionTorrentsTableViewController.swift; sourceTree = "<group>"; };
 		C288164224F8AF9A002DFC9C /* AddTransmissionServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransmissionServiceViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				C288164224F8AF9A002DFC9C /* AddTransmissionServiceViewController.swift */,
 				C270A32C245127C500A1629B /* TransmissionServicesTableViewController.swift */,
 				C270A32E245127CE00A1629B /* TransmissionTorrentsTableViewController.swift */,
+				C266E52B2503614F002E35DA /* TransmissionTorrentsTableViewCell.swift */,
 				C266E52725033C42002E35DA /* Keychain.swift */,
 				C251B3722244541500B2AA04 /* AppDelegate.swift */,
 				C251B3762244541500B2AA04 /* Main.storyboard */,
@@ -315,6 +318,7 @@
 				C251B3732244541500B2AA04 /* AppDelegate.swift in Sources */,
 				C23D02CC2492EB7D00B5D598 /* LandingViewController.swift in Sources */,
 				C270A32F245127CE00A1629B /* TransmissionTorrentsTableViewController.swift in Sources */,
+				C266E52C2503614F002E35DA /* TransmissionTorrentsTableViewCell.swift in Sources */,
 				C266E52825033C42002E35DA /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
