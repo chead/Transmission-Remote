@@ -18,7 +18,7 @@
 		C266E52825033C42002E35DA /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C266E52725033C42002E35DA /* Keychain.swift */; };
 		C266E52C2503614F002E35DA /* TransmissionTorrentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C266E52B2503614F002E35DA /* TransmissionTorrentsTableViewCell.swift */; };
 		C270A32D245127C500A1629B /* TransmissionServicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C270A32C245127C500A1629B /* TransmissionServicesTableViewController.swift */; };
-		C270A32F245127CE00A1629B /* TransmissionTorrentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C270A32E245127CE00A1629B /* TransmissionTorrentsTableViewController.swift */; };
+		C270A32F245127CE00A1629B /* TransmissionServiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C270A32E245127CE00A1629B /* TransmissionServiceTableViewController.swift */; };
 		C288164324F8AF9A002DFC9C /* AddTransmissionServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288164224F8AF9A002DFC9C /* AddTransmissionServiceViewController.swift */; };
 		C288164824FA0952002DFC9C /* TransmissionKit in Frameworks */ = {isa = PBXBuildFile; productRef = C288164724FA0952002DFC9C /* TransmissionKit */; };
 		C2BF7A7524FE06D9005C0258 /* TransmissionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF7A7424FE06D9005C0258 /* TransmissionService.swift */; };
@@ -73,7 +73,7 @@
 		C266E52725033C42002E35DA /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		C266E52B2503614F002E35DA /* TransmissionTorrentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionTorrentsTableViewCell.swift; sourceTree = "<group>"; };
 		C270A32C245127C500A1629B /* TransmissionServicesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionServicesTableViewController.swift; sourceTree = "<group>"; };
-		C270A32E245127CE00A1629B /* TransmissionTorrentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionTorrentsTableViewController.swift; sourceTree = "<group>"; };
+		C270A32E245127CE00A1629B /* TransmissionServiceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionServiceTableViewController.swift; sourceTree = "<group>"; };
 		C288164224F8AF9A002DFC9C /* AddTransmissionServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransmissionServiceViewController.swift; sourceTree = "<group>"; };
 		C2BF7A7424FE06D9005C0258 /* TransmissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionService.swift; sourceTree = "<group>"; };
 		C2BF7A7624FE0818005C0258 /* TransmissionTorrent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionTorrent.swift; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 				C2BF7A7624FE0818005C0258 /* TransmissionTorrent.swift */,
 				C288164224F8AF9A002DFC9C /* AddTransmissionServiceViewController.swift */,
 				C270A32C245127C500A1629B /* TransmissionServicesTableViewController.swift */,
-				C270A32E245127CE00A1629B /* TransmissionTorrentsTableViewController.swift */,
+				C270A32E245127CE00A1629B /* TransmissionServiceTableViewController.swift */,
 				C266E52B2503614F002E35DA /* TransmissionTorrentsTableViewCell.swift */,
 				C266E52725033C42002E35DA /* Keychain.swift */,
 				C251B3722244541500B2AA04 /* AppDelegate.swift */,
@@ -317,7 +317,7 @@
 				C2BF7A7724FE0818005C0258 /* TransmissionTorrent.swift in Sources */,
 				C251B3732244541500B2AA04 /* AppDelegate.swift in Sources */,
 				C23D02CC2492EB7D00B5D598 /* LandingViewController.swift in Sources */,
-				C270A32F245127CE00A1629B /* TransmissionTorrentsTableViewController.swift in Sources */,
+				C270A32F245127CE00A1629B /* TransmissionServiceTableViewController.swift in Sources */,
 				C266E52C2503614F002E35DA /* TransmissionTorrentsTableViewCell.swift in Sources */,
 				C266E52825033C42002E35DA /* Keychain.swift in Sources */,
 			);

@@ -1,5 +1,5 @@
 //
-//  TransmissionTorrentsTableViewController.swift
+//  TransmissionServiceTableViewController.swift
 //  Transmission Remote
 //
 //  Created by 👽 on 4/22/20.
@@ -10,11 +10,8 @@ import UIKit
 import CoreData
 import TransmissionKit
 
-class TransmissionTorrentsTableViewController: UITableViewController , NSFetchedResultsControllerDelegate{
-    var managedObjectContext: NSManagedObjectContext!
+class TransmissionServiceTableViewController: UITableViewController , NSFetchedResultsControllerDelegate{
     var transmissionService: TransmissionService!
-
-    private var transmissionClient: TransmissionKit.Client?
 
     lazy var fetchedResultsController: NSFetchedResultsController<TransmissionTorrent> = {
         let transissionServersFetchRequest: NSFetchRequest<TransmissionTorrent> = NSFetchRequest(entityName: "TransmissionTorrent")
