@@ -10,16 +10,19 @@ import UIKit
 import CoreData
 import TransmissionKit
 
-class TransmissionServiceTableViewController: UITableViewController , NSFetchedResultsControllerDelegate{
+class TransmissionServiceTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+    var managedObjectContext: NSManagedObjectContext!
     var transmissionService: TransmissionService!
 
     lazy var fetchedResultsController: NSFetchedResultsController<TransmissionTorrent> = {
-        let transissionServersFetchRequest: NSFetchRequest<TransmissionTorrent> = NSFetchRequest(entityName: "TransmissionTorrent")
+        let transmissionTorrentsFetchRequest: NSFetchRequest<TransmissionTorrent> = NSFetchRequest(entityName: "TransmissionTorrent")
 
-        transissionServersFetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+        transmissionTorrentsFetchRequest.predicate = NSPredicate(format: "service == %@", self.transmissionService)
 
-        var fetchedResultsController = NSFetchedResultsController(fetchRequest: transissionServersFetchRequest,
-                                                                  managedObjectContext: self.transmissionService.managedObjectContext!,
+        transmissionTorrentsFetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+
+        var fetchedResultsController = NSFetchedResultsController(fetchRequest: transmissionTorrentsFetchRequest,
+                                                                  managedObjectContext: self.managedObjectContext,
                                                                   sectionNameKeyPath: nil,
                                                                   cacheName: nil)
 
@@ -37,7 +40,7 @@ class TransmissionServiceTableViewController: UITableViewController , NSFetchedR
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.transmissionService.refreshTorrents { (error) in }
+        self.transmissionService.refreshTorrents(managedObjectContext: self.managedObjectContext) {}
     }
 
     // MARK: - Table view data source
@@ -67,20 +70,20 @@ class TransmissionServiceTableViewController: UITableViewController , NSFetchedR
         tableView.beginUpdates()
     }
 
-    //    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-    //        switch type {
-    //        case .insert:
-    //            tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
-    //        case .delete:
-    //            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
-    //        case .move:
-    //            break
-    //        case .update:
-    //            break
-    //        @unknown default:
-    //            fatalError()
-    //        }
-    //    }
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .insert:
+            tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .delete:
+            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .move:
+            break
+        case .update:
+            break
+        @unknown default:
+            fatalError()
+        }
+    }
 
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {

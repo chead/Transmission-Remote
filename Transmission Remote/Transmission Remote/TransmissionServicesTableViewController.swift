@@ -134,31 +134,33 @@ class TransmissionServicesTableViewController: UITableViewController, NSFetchedR
         self.selectedTransmissionService = nil
     }
 
-//    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-//        self.selectedTransmissionService = self.fetchedResultsController.object(at: indexPath)
-//
-//        self.performSegue(withIdentifier: "presentEditTransmissionServiceViewController", sender: self)
-//
-//        self.selectedTransmissionService = nil
-//    }
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        self.selectedTransmissionService = self.fetchedResultsController.object(at: indexPath)
+
+        self.performSegue(withIdentifier: "presentEditTransmissionServiceViewController", sender: self)
+
+        self.selectedTransmissionService = nil
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch(segue.identifier) {
         case "presentaAddTransmissionServiceViewController":
-            let transmissionServiceNavigationController = segue.destination as! UINavigationController
-            let transmissionServiceViewController = transmissionServiceNavigationController.viewControllers.first as! AddTransmissionServiceViewController
+            let addTransmissionServiceNavigationController = segue.destination as! UINavigationController
+            let addTransmissionServiceViewController = addTransmissionServiceNavigationController.viewControllers.first as! AddTransmissionServiceViewController
 
-            transmissionServiceViewController.managedObjectContext = self.fetchedResultsController.managedObjectContext
+            addTransmissionServiceViewController.managedObjectContext = self.fetchedResultsController.managedObjectContext
 
-//        case "presentEditTransmissionServiceViewController":
-//            let transmissionServiceNavigationController = segue.destination as! UINavigationController
-//            let transmissionServiceViewController = transmissionServiceNavigationController.viewControllers.first as! EditTransmissionServiceViewController
-//
-//            transmissionServiceViewController.transmissionService = self.selectedTransmissionService
+        case "presentEditTransmissionServiceViewController":
+            let editTransmissionServiceNavigationController = segue.destination as! UINavigationController
+            let editTransmissionServiceViewController = editTransmissionServiceNavigationController.viewControllers.first as! EditTransmissionServiceViewController
+
+            editTransmissionServiceViewController.managedObjectContext = self.fetchedResultsController.managedObjectContext
+            editTransmissionServiceViewController.transmissionService = self.selectedTransmissionService
 
         case "showTransmissionTorrentsTableViewController":
             let transmissionServiceTableViewController = segue.destination as! TransmissionServiceTableViewController
 
+            transmissionServiceTableViewController.managedObjectContext = self.fetchedResultsController.managedObjectContext
             transmissionServiceTableViewController.transmissionService = self.selectedTransmissionService
 
         default:

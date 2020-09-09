@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19G2021" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="TransmissionService" representedClassName="TransmissionService" syncable="YES">
         <attribute name="created" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="host" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="port" attributeType="String"/>
         <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO"/>
-        <relationship name="torrents" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TransmissionTorrent" inverseName="service" inverseEntity="TransmissionTorrent"/>
+        <relationship name="torrents" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="TransmissionTorrent" inverseName="service" inverseEntity="TransmissionTorrent"/>
     </entity>
     <entity name="TransmissionTorrent" representedClassName="TransmissionTorrent" syncable="YES">
         <attribute name="id" attributeType="String"/>

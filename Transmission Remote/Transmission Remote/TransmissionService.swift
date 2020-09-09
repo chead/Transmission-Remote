@@ -18,14 +18,14 @@ public class TransmissionService: NSManagedObject {
     @NSManaged var port: String
     @NSManaged var created: Date
     @NSManaged var uuid: UUID
-    @NSManaged var torrents: Set<TransmissionTorrent>
+    @NSManaged var torrents: [TransmissionTorrent]
 
-    func refreshTorrents(completion: (Error?) -> Void) {
+    private func getTorrents(completion: @escaping (Result<[Torrent], Error>) -> Void) {
         var credentials: Credentials?
 
-        if let receivedData = Keychain.load(key: self.uuid.uuidString) {
+        if let keychainData = Keychain.load(key: self.uuid.uuidString) {
             do {
-                credentials = try JSONDecoder().decode(Credentials.self, from: receivedData)
+                credentials = try JSONDecoder().decode(Credentials.self, from: keychainData)
             } catch {}
         }
 
@@ -34,21 +34,32 @@ public class TransmissionService: NSManagedObject {
         transmissionClient.make(request: Torrents.getTorrents(), completion: { (result) in
             switch result {
             case .success(let result):
-                for transmissionTorrent in self.torrents {
-                    self.managedObjectContext?.delete(transmissionTorrent)
-                }
+                completion(.success(result.arguments.torrents))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        })
+    }
 
-                for torrent in result.arguments.torrents {
+    func refreshTorrents(managedObjectContext: NSManagedObjectContext, completion: () -> Void) {
+        for transmissionTorrent in self.torrents {
+            self.managedObjectContext?.delete(transmissionTorrent)
+        }
+
+        self.getTorrents { (result) in
+            switch result {
+            case .success(let torrents):
+                for torrent in torrents {
                     guard
-                        let transmissionTorrent = NSEntityDescription.insertNewObject(forEntityName: "TransmissionTorrent", into: self.managedObjectContext!) as? TransmissionTorrent
-                        else { break }
+                        let transmissionTorrent = NSEntityDescription.insertNewObject(forEntityName: "TransmissionTorrent", into: managedObjectContext) as? TransmissionTorrent
+                        else { fatalError("Failed to initialize NSEntityDescription: TransmissionTorrent") }
 
                     transmissionTorrent.id = "\(torrent.id)"
                     transmissionTorrent.name = torrent.name
                     transmissionTorrent.service = self
 
                     do {
-                        try self.managedObjectContext?.save()
+                        try managedObjectContext.save()
                     } catch {
                         fatalError("Failed to save NSManagedObjectContext: \(error.localizedDescription)")
                     }
@@ -56,6 +67,8 @@ public class TransmissionService: NSManagedObject {
             case .failure(let error):
                 print(error.localizedDescription)
             }
-        })
+        }
+
+        completion()
     }
 }

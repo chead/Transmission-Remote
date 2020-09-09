@@ -46,44 +46,14 @@
         <!--Torrents-->
         <scene sceneID="7Pi-TM-EDB">
             <objects>
-                <tableViewController id="jnS-vQ-srL" customClass="TransmissionTorrentsTableViewController" customModule="Transmission_Remote" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="jnS-vQ-srL" customClass="TransmissionServiceTableViewController" customModule="Transmission_Remote" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="W08-gT-mNz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="fva-bq-V1M">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="HBt-C2-Ywn">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                    <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="GVu-bY-ce9">
-                                            <rect key="frame" x="141.5" y="0.0" width="131" height="44"/>
-                                            <subviews>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="6Ky-VS-GFA">
-                                                    <rect key="frame" x="0.0" y="6.5" width="131" height="32"/>
-                                                    <segments>
-                                                        <segment title="First"/>
-                                                        <segment title="Second"/>
-                                                    </segments>
-                                                </segmentedControl>
-                                            </subviews>
-                                        </stackView>
-                                    </subviews>
-                                </stackView>
-                            </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            <constraints>
-                                <constraint firstItem="HBt-C2-Ywn" firstAttribute="leading" secondItem="fva-bq-V1M" secondAttribute="leading" id="1Jn-6H-Bz2"/>
-                                <constraint firstAttribute="bottom" secondItem="HBt-C2-Ywn" secondAttribute="bottom" id="2G6-MA-9Hc"/>
-                                <constraint firstAttribute="trailing" secondItem="HBt-C2-Ywn" secondAttribute="trailing" id="XOw-7W-BfR"/>
-                                <constraint firstItem="HBt-C2-Ywn" firstAttribute="top" secondItem="fva-bq-V1M" secondAttribute="top" id="p7m-et-GgZ"/>
-                            </constraints>
-                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="transmissionTorrentTableViewCell" rowHeight="44" id="8ss-Fr-L3q" customClass="TransmissionTorrentsTableViewCell" customModule="Transmission_Remote" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8ss-Fr-L3q" id="0lT-uK-yQY">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -167,6 +137,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="jnS-vQ-srL" kind="show" identifier="showTransmissionTorrentsTableViewController" id="c9r-hS-6fN"/>
+                        <segue destination="DuX-rE-R0r" kind="presentation" identifier="presentEditTransmissionServiceViewController" modalPresentationStyle="currentContext" id="WmN-iy-Xf6"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7oA-cH-lBr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -379,6 +350,76 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KtR-RX-qkJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2712" y="110"/>
+        </scene>
+        <!--Edit Transmission Service View Controller-->
+        <scene sceneID="imn-q2-Kow">
+            <objects>
+                <viewController id="uy1-op-xrI" customClass="EditTransmissionServiceViewController" customModule="Transmission_Remote" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="X5H-7F-vRK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="vSu-HB-Qum">
+                                <rect key="frame" x="103.5" y="136" width="207" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gq-Fg-1Cc">
+                                        <rect key="frame" x="0.0" y="0.0" width="207" height="30"/>
+                                        <state key="normal" title="Delete">
+                                            <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="tappedDeleteButtonWithSender:" destination="uy1-op-xrI" eventType="touchUpInside" id="uy4-ZS-hEF"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="vSu-HB-Qum" firstAttribute="width" secondItem="X5H-7F-vRK" secondAttribute="width" multiplier="0.5" id="9Av-Nw-rZx"/>
+                            <constraint firstItem="vSu-HB-Qum" firstAttribute="centerX" secondItem="hFO-aF-lkU" secondAttribute="centerX" id="l0b-eG-n88"/>
+                            <constraint firstItem="vSu-HB-Qum" firstAttribute="top" secondItem="hFO-aF-lkU" secondAttribute="top" constant="48" id="qd7-jK-5ve"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="hFO-aF-lkU"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Skk-T4-Ewy">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="cTj-5H-Gzb">
+                            <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <segue destination="5hI-hF-FyL" kind="unwind" identifier="unwindToTransmissionServicesTableViewController" unwindAction="unwindToTransmissionServicesTableViewControllerWithSegue:" id="qvz-DY-Nbr"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="done" id="cSK-YJ-Pa1"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cancelBarButtonItem" destination="cTj-5H-Gzb" id="KYx-MG-p4u"/>
+                        <outlet property="deleteButton" destination="6gq-Fg-1Cc" id="1TP-7E-Mnz"/>
+                        <outlet property="doneBarButtonItem" destination="cSK-YJ-Pa1" id="GtH-gc-Vqc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xMh-QB-K63" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="5hI-hF-FyL" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1845" y="-1258"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2zj-3f-OxJ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DuX-rE-R0r" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="7bF-wK-geF"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="X7o-Z3-PjD">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="uy1-op-xrI" kind="relationship" relationship="rootViewController" id="7Rd-uU-ubf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DNs-Xe-67z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="935" y="-1258"/>
         </scene>
     </scenes>
 </document>
