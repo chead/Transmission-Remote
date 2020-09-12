@@ -80,7 +80,6 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="title" destination="Pio-gd-n9W" id="Hmp-xd-SNN"/>
-                                    <segue destination="My9-xa-hdY" kind="show" id="SzR-ex-lgR"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -311,45 +310,6 @@
                 <exit id="rlU-eJ-336" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1845" y="-571"/>
-        </scene>
-        <!--Torrent-->
-        <scene sceneID="0CA-Nd-IF9">
-            <objects>
-                <viewController title="Torrent" id="My9-xa-hdY" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="sAg-F0-uOO">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="orF-cl-1IG">
-                                <rect key="frame" x="103.5" y="136" width="207" height="20.5"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="876-XK-QUb">
-                                        <rect key="frame" x="0.0" y="0.0" width="207" height="20.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUc-S3-65t">
-                                                <rect key="frame" x="0.0" y="0.0" width="207" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="orF-cl-1IG" firstAttribute="top" secondItem="XXF-zj-YPF" secondAttribute="top" constant="48" id="dHE-jG-xxn"/>
-                            <constraint firstItem="orF-cl-1IG" firstAttribute="centerX" secondItem="XXF-zj-YPF" secondAttribute="centerX" id="plQ-Ti-U5P"/>
-                            <constraint firstItem="orF-cl-1IG" firstAttribute="width" secondItem="sAg-F0-uOO" secondAttribute="width" multiplier="0.5" id="vjG-Or-mnC"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="XXF-zj-YPF"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Torrent" id="NdJ-YW-qgM"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KtR-RX-qkJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2712" y="110"/>
         </scene>
         <!--Edit Transmission Service View Controller-->
         <scene sceneID="imn-q2-Kow">

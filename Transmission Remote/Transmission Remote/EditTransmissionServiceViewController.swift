@@ -29,6 +29,12 @@ class EditTransmissionServiceViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { action in
             self.managedObjectContext.delete(self.transmissionService)
 
+            do {
+                try self.managedObjectContext.save()
+            } catch {
+                fatalError("Failed to save NSManagedObjectContext: \(error.localizedDescription)")
+            }
+
             self.performSegue(withIdentifier: "unwindToTransmissionServicesTableViewController", sender: self)
         }))
 

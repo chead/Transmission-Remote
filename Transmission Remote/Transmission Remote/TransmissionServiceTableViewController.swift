@@ -40,7 +40,9 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.transmissionService.refreshTorrents(managedObjectContext: self.managedObjectContext) {}
+        if(self.transmissionService.torrents.isEmpty) {
+            self.transmissionService.refreshTorrents(managedObjectContext: self.managedObjectContext) {}
+        }
     }
 
     // MARK: - Table view data source

@@ -71,4 +71,10 @@ public class TransmissionService: NSManagedObject {
 
         completion()
     }
+
+    override public func prepareForDeletion() {
+        super.prepareForDeletion()
+
+        let _ = Keychain.delete(key: self.uuid.uuidString)
+    }
 }

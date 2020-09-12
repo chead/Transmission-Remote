@@ -12,13 +12,23 @@ import Security
 // Via https://stackoverflow.com/a/37539998/10913592
 
 class Keychain {
+    class func delete(key: String) -> OSStatus {
+        let query = [
+            kSecClass as String       : kSecClassGenericPassword as String,
+            kSecAttrAccount as String : key ] as [String : Any]
+
+        return SecItemDelete(query as CFDictionary)
+    }
+
     class func save(key: String, data: Data) -> OSStatus {
         let query = [
             kSecClass as String       : kSecClassGenericPassword as String,
             kSecAttrAccount as String : key,
             kSecValueData as String   : data ] as [String : Any]
 
-        SecItemDelete(query as CFDictionary)
+        let deleteStatus = Keychain.delete(key: key)
+
+        guard deleteStatus == errSecSuccess || deleteStatus == errSecItemNotFound else { return deleteStatus }
 
         return SecItemAdd(query as CFDictionary, nil)
     }
