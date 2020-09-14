@@ -160,7 +160,6 @@ class TransmissionServicesTableViewController: UITableViewController, NSFetchedR
         case "showTransmissionTorrentsTableViewController":
             let transmissionServiceTableViewController = segue.destination as! TransmissionServiceTableViewController
 
-            transmissionServiceTableViewController.managedObjectContext = self.fetchedResultsController.managedObjectContext
             transmissionServiceTableViewController.transmissionService = self.selectedTransmissionService
 
         default:

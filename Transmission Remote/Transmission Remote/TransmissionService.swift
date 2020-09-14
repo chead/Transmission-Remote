@@ -20,6 +20,30 @@ public class TransmissionService: NSManagedObject {
     @NSManaged var uuid: UUID
     @NSManaged var torrents: [TransmissionTorrent]
 
+    func addCredentials(username: String, password: String) {
+        let credentials = Credentials(username: username, password: password)
+
+        do {
+            let credentialsData = try JSONEncoder().encode(credentials)
+
+            _ = Keychain.save(key: self.uuid.uuidString, data: credentialsData)
+        } catch {
+            fatalError("Failed to encode credentials: \(error.localizedDescription)")
+        }
+    }
+
+    func udpateCredentials(username: String, password: String) {
+        let credentials = Credentials(username: username, password: password)
+
+        do {
+            let credentialsData = try JSONEncoder().encode(credentials)
+
+            _ = Keychain.update(key: self.uuid.uuidString, data: credentialsData)
+        } catch {
+            fatalError("Failed to encode credentials: \(error.localizedDescription)")
+        }
+    }
+
     private func getTorrents(completion: @escaping (Result<[Torrent], Error>) -> Void) {
         var credentials: Credentials?
 
@@ -41,7 +65,7 @@ public class TransmissionService: NSManagedObject {
         })
     }
 
-    func refreshTorrents(managedObjectContext: NSManagedObjectContext, completion: () -> Void) {
+    func refreshTorrents(completion: () -> Void) {
         for transmissionTorrent in self.torrents {
             self.managedObjectContext?.delete(transmissionTorrent)
         }
@@ -51,7 +75,7 @@ public class TransmissionService: NSManagedObject {
             case .success(let torrents):
                 for torrent in torrents {
                     guard
-                        let transmissionTorrent = NSEntityDescription.insertNewObject(forEntityName: "TransmissionTorrent", into: managedObjectContext) as? TransmissionTorrent
+                        let transmissionTorrent = NSEntityDescription.insertNewObject(forEntityName: "TransmissionTorrent", into: self.managedObjectContext!) as? TransmissionTorrent
                         else { fatalError("Failed to initialize NSEntityDescription: TransmissionTorrent") }
 
                     transmissionTorrent.id = "\(torrent.id)"
@@ -59,7 +83,7 @@ public class TransmissionService: NSManagedObject {
                     transmissionTorrent.service = self
 
                     do {
-                        try managedObjectContext.save()
+                        try self.managedObjectContext!.save()
                     } catch {
                         fatalError("Failed to save NSManagedObjectContext: \(error.localizedDescription)")
                     }

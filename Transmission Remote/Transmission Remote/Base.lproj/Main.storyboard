@@ -319,11 +319,103 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="vSu-HB-Qum">
-                                <rect key="frame" x="103.5" y="136" width="207" height="30"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gAG-Xn-Ous">
+                                <rect key="frame" x="103.5" y="136" width="207" height="240"/>
                                 <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="p3t-cG-pHb">
+                                        <rect key="frame" x="0.0" y="0.0" width="207" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kPw-on-U5w">
+                                                <rect key="frame" x="0.0" y="0.0" width="45" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Transmission" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LDJ-Ba-BTY">
+                                                <rect key="frame" x="53" y="0.0" width="154" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" spellCheckingType="no"/>
+                                                <connections>
+                                                    <action selector="didFinishEditingTextfieldWithSender:" destination="uy1-op-xrI" eventType="editingDidEnd" id="yq3-6J-pfz"/>
+                                                </connections>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bsz-R7-88G">
+                                        <rect key="frame" x="0.0" y="42" width="207" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Host" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0XJ-eO-fcw">
+                                                <rect key="frame" x="0.0" y="0.0" width="45" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eeQ-Oh-UN4">
+                                                <rect key="frame" x="53" y="0.0" width="154" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" spellCheckingType="no"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="RpA-DM-7Cj">
+                                        <rect key="frame" x="0.0" y="84" width="207" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Port" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNh-HH-PXJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="45" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="9091" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TNF-8g-15h">
+                                                <rect key="frame" x="53" y="0.0" width="154" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                <connections>
+                                                    <action selector="didFinishEditingTextfieldWithSender:" destination="uy1-op-xrI" eventType="editingDidEnd" id="xfF-6B-XFi"/>
+                                                </connections>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="oup-3T-evx">
+                                        <rect key="frame" x="0.0" y="126" width="207" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JkQ-da-l18">
+                                                <rect key="frame" x="0.0" y="0.0" width="78.5" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lCM-Oy-Vws">
+                                                <rect key="frame" x="86.5" y="0.0" width="120.5" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" textContentType="username"/>
+                                                <connections>
+                                                    <action selector="didFinishEditingTextfieldWithSender:" destination="uy1-op-xrI" eventType="editingDidEnd" id="YJJ-8v-bgj"/>
+                                                </connections>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xIH-3T-YA8">
+                                        <rect key="frame" x="0.0" y="168" width="207" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OGb-vg-4k8">
+                                                <rect key="frame" x="0.0" y="0.0" width="78.5" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v4p-v4-DuI">
+                                                <rect key="frame" x="86.5" y="0.0" width="120.5" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                                <connections>
+                                                    <action selector="didFinishEditingTextfieldWithSender:" destination="uy1-op-xrI" eventType="editingDidEnd" id="Pnt-N2-wVs"/>
+                                                </connections>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gq-Fg-1Cc">
-                                        <rect key="frame" x="0.0" y="0.0" width="207" height="30"/>
+                                        <rect key="frame" x="0.0" y="210" width="207" height="30"/>
                                         <state key="normal" title="Delete">
                                             <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -332,13 +424,18 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="v4p-v4-DuI" firstAttribute="width" secondItem="lCM-Oy-Vws" secondAttribute="width" id="BLf-0P-b08"/>
+                                    <constraint firstItem="LDJ-Ba-BTY" firstAttribute="width" secondItem="eeQ-Oh-UN4" secondAttribute="width" id="CYB-bl-14Z"/>
+                                    <constraint firstItem="eeQ-Oh-UN4" firstAttribute="width" secondItem="TNF-8g-15h" secondAttribute="width" id="aah-7F-4cN"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="vSu-HB-Qum" firstAttribute="width" secondItem="X5H-7F-vRK" secondAttribute="width" multiplier="0.5" id="9Av-Nw-rZx"/>
-                            <constraint firstItem="vSu-HB-Qum" firstAttribute="centerX" secondItem="hFO-aF-lkU" secondAttribute="centerX" id="l0b-eG-n88"/>
-                            <constraint firstItem="vSu-HB-Qum" firstAttribute="top" secondItem="hFO-aF-lkU" secondAttribute="top" constant="48" id="qd7-jK-5ve"/>
+                            <constraint firstItem="gAG-Xn-Ous" firstAttribute="width" secondItem="X5H-7F-vRK" secondAttribute="width" multiplier="0.5" id="D1k-DZ-nQj"/>
+                            <constraint firstItem="gAG-Xn-Ous" firstAttribute="top" secondItem="hFO-aF-lkU" secondAttribute="top" constant="48" id="Hi3-15-LOP"/>
+                            <constraint firstItem="gAG-Xn-Ous" firstAttribute="centerX" secondItem="X5H-7F-vRK" secondAttribute="centerX" id="PM2-AL-Hip"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hFO-aF-lkU"/>
                     </view>
@@ -355,6 +452,11 @@
                         <outlet property="cancelBarButtonItem" destination="cTj-5H-Gzb" id="KYx-MG-p4u"/>
                         <outlet property="deleteButton" destination="6gq-Fg-1Cc" id="1TP-7E-Mnz"/>
                         <outlet property="doneBarButtonItem" destination="cSK-YJ-Pa1" id="GtH-gc-Vqc"/>
+                        <outlet property="hostTextField" destination="eeQ-Oh-UN4" id="OwU-ng-dTL"/>
+                        <outlet property="nameTextField" destination="LDJ-Ba-BTY" id="A3Z-0E-0He"/>
+                        <outlet property="passwordTextField" destination="v4p-v4-DuI" id="mw6-uP-4Og"/>
+                        <outlet property="portTextField" destination="TNF-8g-15h" id="ww1-aB-FW4"/>
+                        <outlet property="usernameTextField" destination="lCM-Oy-Vws" id="QOA-OX-aa4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xMh-QB-K63" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

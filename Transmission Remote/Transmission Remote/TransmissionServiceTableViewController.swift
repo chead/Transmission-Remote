@@ -11,7 +11,6 @@ import CoreData
 import TransmissionKit
 
 class TransmissionServiceTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-    var managedObjectContext: NSManagedObjectContext!
     var transmissionService: TransmissionService!
 
     lazy var fetchedResultsController: NSFetchedResultsController<TransmissionTorrent> = {
@@ -22,7 +21,7 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
         transmissionTorrentsFetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
 
         var fetchedResultsController = NSFetchedResultsController(fetchRequest: transmissionTorrentsFetchRequest,
-                                                                  managedObjectContext: self.managedObjectContext,
+                                                                  managedObjectContext: self.transmissionService.managedObjectContext!,
                                                                   sectionNameKeyPath: nil,
                                                                   cacheName: nil)
 
@@ -40,9 +39,7 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if(self.transmissionService.torrents.isEmpty) {
-            self.transmissionService.refreshTorrents(managedObjectContext: self.managedObjectContext) {}
-        }
+        self.transmissionService.refreshTorrents() {}
     }
 
     // MARK: - Table view data source

@@ -8,11 +8,17 @@
 
 import UIKit
 import CoreData
+import TransmissionKit
 
 class EditTransmissionServiceViewController: UIViewController {
     var managedObjectContext: NSManagedObjectContext!
     var transmissionService: TransmissionService!
 
+    @IBOutlet var nameTextField: UITextField!
+    @IBOutlet var hostTextField: UITextField!
+    @IBOutlet var portTextField: UITextField!
+    @IBOutlet var usernameTextField: UITextField!
+    @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var deleteButton: UIButton!
     @IBOutlet var cancelBarButtonItem: UIBarButtonItem!
     @IBOutlet var doneBarButtonItem: UIBarButtonItem!
@@ -20,9 +26,56 @@ class EditTransmissionServiceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.nameTextField.text = self.transmissionService.name
+        self.hostTextField.text = self.transmissionService.host
+        self.portTextField.text = self.transmissionService.port
+
+        var credentials: Credentials?
+
+        if let keychainData = Keychain.load(key: self.transmissionService.uuid.uuidString) {
+            do {
+                credentials = try JSONDecoder().decode(Credentials.self, from: keychainData)
+            } catch {}
+        }
+        
+        self.usernameTextField.text = credentials?.username
     }
     
+    @IBAction func doneBarButtonItemPressed(sender: UIBarButtonItem) {
+        guard
+            let serviceName = self.nameTextField.text,
+            let serviceHost = self.hostTextField.text,
+            let servicePort = self.portTextField.text
+        else {
+            return
+        }
+
+        self.transmissionService.name = serviceName.isEmpty ? "Transmission" : serviceName
+        self.transmissionService.host = serviceHost
+        self.transmissionService.port = servicePort.isEmpty ? "9091" : servicePort
+
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            fatalError("Failed to save NSManagedObjectContext: \(error.localizedDescription)")
+        }
+
+        if
+            let username = self.usernameTextField.text,
+            let password = self.passwordTextField.text,
+            username.isEmpty == false,
+            password.isEmpty == false
+        {
+            self.transmissionService.udpateCredentials(username: username, password: password)
+        }
+
+        self.dismiss(animated: true) {}
+    }
+
+    @IBAction func didFinishEditingTextfield(sender: UITextField!) {
+        self.doneBarButtonItem.isEnabled = self.hostTextField.text?.isEmpty == false
+    }
+
     @IBAction func tappedDeleteButton(sender: UIButton) {
         let alert = UIAlertController(title: "Delete?", message: "Delete this Transmission Service?", preferredStyle: .alert)
 
@@ -42,15 +95,5 @@ class EditTransmissionServiceViewController: UIViewController {
 
         self.present(alert, animated: true)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -60,15 +60,7 @@ class AddTransmissionServiceViewController: UIViewController {
             username.isEmpty == false,
             password.isEmpty == false
         {
-            let credentials = Credentials(username: username, password: password)
-
-            do {
-                let credentialsData = try JSONEncoder().encode(credentials)
-
-                _ = Keychain.save(key: transmissionService.uuid.uuidString, data: credentialsData)
-            } catch {
-                fatalError("Failed to encode credentials: \(error.localizedDescription)")
-            }
+            transmissionService.addCredentials(username: username, password: password)
         }
 
         self.dismiss(animated: true) {}
