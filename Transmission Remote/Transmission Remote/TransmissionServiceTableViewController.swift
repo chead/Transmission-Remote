@@ -13,6 +13,16 @@ import TransmissionKit
 class TransmissionServiceTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     var transmissionService: TransmissionService!
 
+    let searchController = UISearchController(searchResultsController: nil)
+
+    private var filteredTransmissionTorrents: [TransmissionTorrent] = []
+
+    private var isFiltering: Bool { return searchController.isActive && !isSearchBarEmpty }
+
+    var isSearchBarEmpty: Bool {
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+
     lazy var fetchedResultsController: NSFetchedResultsController<TransmissionTorrent> = {
         let transmissionTorrentsFetchRequest: NSFetchRequest<TransmissionTorrent> = NSFetchRequest(entityName: "TransmissionTorrent")
 
@@ -39,6 +49,14 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.searchController.searchResultsUpdater = self
+        self.searchController.obscuresBackgroundDuringPresentation = false
+        self.searchController.searchBar.placeholder = "Search Titles"
+
+        self.navigationItem.searchController = searchController
+
+        self.definesPresentationContext = true
+
         self.transmissionService.refreshTorrents() {}
     }
 
@@ -49,16 +67,23 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sections = self.fetchedResultsController.sections!
-        let sectionInfo = sections[section]
-
-        return sectionInfo.numberOfObjects
+        if(self.isFiltering) {
+            return self.filteredTransmissionTorrents.count
+        } else {
+            return self.fetchedResultsController.sections![section].numberOfObjects
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "transmissionTorrentTableViewCell", for: indexPath) as! TransmissionTorrentsTableViewCell
 
-        let transmissionTorrent = self.fetchedResultsController.object(at: indexPath)
+        let transmissionTorrent: TransmissionTorrent
+
+        if(isFiltering) {
+            transmissionTorrent = self.filteredTransmissionTorrents[indexPath.row]
+        } else {
+            transmissionTorrent = self.fetchedResultsController.object(at: indexPath)
+        }
 
         cell.title.text = transmissionTorrent.name
 
@@ -103,5 +128,23 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
         tableView.endUpdates()
     }
 
+    func filterTorrentsByTitle(title: String) {
+        guard let fetchedObjects = self.fetchedResultsController.fetchedObjects else { return }
+
+        self.filteredTransmissionTorrents = fetchedObjects.filter({ (transmissionTorrent) -> Bool in
+            return transmissionTorrent.name.lowercased().contains(title.lowercased())
+        })
+
+        tableView.reloadData()
+    }
+
+}
+
+extension TransmissionServiceTableViewController: UISearchResultsUpdating {
+  func updateSearchResults(for searchController: UISearchController) {
+    let searchBar = self.searchController.searchBar
+
+    self.filterTorrentsByTitle(title: searchBar.text!)
+  }
 
 }
