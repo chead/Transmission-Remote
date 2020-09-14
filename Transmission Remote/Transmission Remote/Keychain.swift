@@ -20,6 +20,14 @@ class Keychain {
         return SecItemDelete(query as CFDictionary)
     }
 
+    class func update(key: String, data: Data) -> OSStatus {
+        let query = [
+            kSecClass as String       : kSecClassGenericPassword as String,
+            kSecAttrAccount as String : key ] as [String : Any]
+
+        return SecItemUpdate(query as CFDictionary, [kSecValueData: data] as CFDictionary)
+    }
+
     class func save(key: String, data: Data) -> OSStatus {
         let query = [
             kSecClass as String       : kSecClassGenericPassword as String,
@@ -50,25 +58,4 @@ class Keychain {
             return nil
         }
     }
-
-    class func createUniqueID() -> String {
-        let uuid: CFUUID = CFUUIDCreate(nil)
-        let cfStr: CFString = CFUUIDCreateString(nil, uuid)
-
-        let swiftString: String = cfStr as String
-        return swiftString
-    }
 }
-
-//extension Data {
-//
-//    init<T>(from value: T) {
-//        var value = value
-//
-//        self.init(buffer: UnsafeBufferPointer(start: &value, count: 1))
-//    }
-//
-//    func to<T>(type: T.Type) -> T {
-//        return self.withUnsafeBytes { $0.load(as: T.self) }
-//    }
-//}
