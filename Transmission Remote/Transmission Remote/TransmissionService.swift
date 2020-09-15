@@ -65,7 +65,7 @@ public class TransmissionService: NSManagedObject {
         })
     }
 
-    func refreshTorrents(completion: () -> Void) {
+    func refreshTorrents(completion: @escaping () -> Void) {
         for transmissionTorrent in self.torrents {
             self.managedObjectContext?.delete(transmissionTorrent)
         }
@@ -81,19 +81,20 @@ public class TransmissionService: NSManagedObject {
                     transmissionTorrent.id = "\(torrent.id)"
                     transmissionTorrent.name = torrent.name
                     transmissionTorrent.service = self
-
-                    do {
-                        try self.managedObjectContext!.save()
-                    } catch {
-                        fatalError("Failed to save NSManagedObjectContext: \(error.localizedDescription)")
-                    }
                 }
+
+                do {
+                    try self.managedObjectContext!.save()
+                } catch {
+                    fatalError("Failed to save NSManagedObjectContext: \(error.localizedDescription)")
+                }
+
             case .failure(let error):
                 print(error.localizedDescription)
             }
-        }
 
-        completion()
+            completion()
+        }
     }
 
     override public func prepareForDeletion() {

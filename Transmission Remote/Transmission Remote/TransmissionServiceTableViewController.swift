@@ -17,17 +17,12 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
 
     private var filteredTransmissionTorrents: [TransmissionTorrent] = []
 
-    private var isFiltering: Bool { return searchController.isActive && !isSearchBarEmpty }
-
-    var isSearchBarEmpty: Bool {
-      return searchController.searchBar.text?.isEmpty ?? true
-    }
+    private var isFiltering: Bool { return searchController.isActive && !(searchController.searchBar.text?.isEmpty ?? true) }
 
     lazy var fetchedResultsController: NSFetchedResultsController<TransmissionTorrent> = {
         let transmissionTorrentsFetchRequest: NSFetchRequest<TransmissionTorrent> = NSFetchRequest(entityName: "TransmissionTorrent")
 
         transmissionTorrentsFetchRequest.predicate = NSPredicate(format: "service == %@", self.transmissionService)
-
         transmissionTorrentsFetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
 
         var fetchedResultsController = NSFetchedResultsController(fetchRequest: transmissionTorrentsFetchRequest,
@@ -57,17 +52,23 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
 
         self.definesPresentationContext = true
 
+        self.refreshControl!.addTarget(self, action: #selector(pulledToRefresh), for: UIControl.Event.valueChanged)
+
         self.transmissionService.refreshTorrents() {}
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return self.fetchedResultsController.sections!.count
+        if(isFiltering) {
+            return 1
+        } else {
+            return self.fetchedResultsController.sections!.count
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(self.isFiltering) {
+        if(isFiltering) {
             return self.filteredTransmissionTorrents.count
         } else {
             return self.fetchedResultsController.sections![section].numberOfObjects
@@ -136,6 +137,14 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
         })
 
         tableView.reloadData()
+    }
+
+    @objc func pulledToRefresh(refreshControl: UIRefreshControl) {
+        if(self.isFiltering == false) {
+            self.transmissionService.refreshTorrents() {}
+        }
+
+        refreshControl.endRefreshing()
     }
 
 }

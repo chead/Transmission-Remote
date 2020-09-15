@@ -88,7 +88,15 @@
                             <outlet property="delegate" destination="jnS-vQ-srL" id="9cY-C2-f9y"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Torrents" id="Y76-Si-8oX"/>
+                    <navigationItem key="navigationItem" title="Torrents" id="Y76-Si-8oX">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="A51-CU-RfW"/>
+                            <barButtonItem title="Filter" id="dHT-VW-UlF"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Swn-Nu-Koq">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wH9-DD-jWd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
