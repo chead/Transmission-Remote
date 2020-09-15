@@ -11,6 +11,9 @@ import CoreData
 import TransmissionKit
 
 class TransmissionServiceTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+
     var transmissionService: TransmissionService!
 
     let searchController = UISearchController(searchResultsController: nil)
@@ -43,6 +46,7 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.definesPresentationContext = true
 
         self.searchController.searchResultsUpdater = self
         self.searchController.obscuresBackgroundDuringPresentation = false
@@ -50,9 +54,10 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
 
         self.navigationItem.searchController = searchController
 
-        self.definesPresentationContext = true
-
         self.refreshControl!.addTarget(self, action: #selector(pulledToRefresh), for: UIControl.Event.valueChanged)
+
+        self.activityIndicator.center = self.view.center
+        self.view.addSubview(activityIndicator)
 
         self.transmissionService.refreshTorrents() {}
     }
@@ -126,6 +131,7 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
     }
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.activityIndicator.stopAnimating()
         tableView.endUpdates()
     }
 

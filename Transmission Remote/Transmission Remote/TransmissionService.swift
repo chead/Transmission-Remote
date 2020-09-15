@@ -66,13 +66,13 @@ public class TransmissionService: NSManagedObject {
     }
 
     func refreshTorrents(completion: @escaping () -> Void) {
-        for transmissionTorrent in self.torrents {
-            self.managedObjectContext?.delete(transmissionTorrent)
-        }
-
         self.getTorrents { (result) in
             switch result {
             case .success(let torrents):
+                for transmissionTorrent in self.torrents {
+                    self.managedObjectContext?.delete(transmissionTorrent)
+                }
+
                 for torrent in torrents {
                     guard
                         let transmissionTorrent = NSEntityDescription.insertNewObject(forEntityName: "TransmissionTorrent", into: self.managedObjectContext!) as? TransmissionTorrent
