@@ -91,7 +91,7 @@ public class TransmissionService: NSManagedObject {
         })
     }
 
-    func addTorrent(url: URL, completion: () -> Void) {
+    func addTorrent(url: URL, completion: @escaping () -> Void) {
         do {
             let encodedTorrent = try Data(contentsOf: url).base64EncodedString()
 
@@ -102,12 +102,12 @@ public class TransmissionService: NSManagedObject {
                 case .failure(let error):
                     print("\(error.localizedDescription)")
                 }
+
+                completion()
             })
         } catch {
             fatalError("Failed to encode torrent data: \(error.localizedDescription)")
         }
-
-        completion()
     }
 
     override public func prepareForDeletion() {

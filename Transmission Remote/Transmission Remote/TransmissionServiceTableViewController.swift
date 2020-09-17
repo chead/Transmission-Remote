@@ -54,9 +54,10 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
 
         self.navigationItem.searchController = searchController
 
-        self.refreshControl!.addTarget(self, action: #selector(pulledToRefresh), for: UIControl.Event.valueChanged)
+        self.refreshControl?.addTarget(self, action: #selector(pulledToRefresh), for: UIControl.Event.valueChanged)
 
         self.activityIndicator.center = self.view.center
+
         self.view.addSubview(activityIndicator)
 
         self.transmissionService.refreshTorrents() {
@@ -135,7 +136,7 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
     }
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
+        self.tableView.endUpdates()
     }
 
     func filterTorrentsByTitle(title: String) {
@@ -145,7 +146,7 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
             return transmissionTorrent.name.lowercased().contains(title.lowercased())
         })
 
-        tableView.reloadData()
+        self.tableView.reloadData()
     }
 
     @objc func pulledToRefresh(refreshControl: UIRefreshControl) {
@@ -182,7 +183,13 @@ extension TransmissionServiceTableViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         guard let torrentURL = urls.first else { return }
 
-        self.transmissionService.addTorrent(url: torrentURL) {}
+        self.transmissionService.addTorrent(url: torrentURL) {
+            self.transmissionService.refreshTorrents() {
+                DispatchQueue.main.async{
+                    self.activityIndicator.stopAnimating()
+                }
+            }
+        }
     }
 
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {}
