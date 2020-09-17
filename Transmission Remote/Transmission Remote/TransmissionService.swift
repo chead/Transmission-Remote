@@ -73,6 +73,8 @@ public class TransmissionService: NSManagedObject {
                     transmissionTorrent.name = torrent.name
                     transmissionTorrent.finished = torrent.isFinished
                     transmissionTorrent.service = self
+                    transmissionTorrent.added = torrent.addedDate
+                    transmissionTorrent.activity = torrent.activityDate
                 }
 
                 do {

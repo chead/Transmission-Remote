@@ -14,6 +14,8 @@ import CoreData
 public class TransmissionTorrent: NSManagedObject {
     @NSManaged var id: String
     @NSManaged var name: String
+    @NSManaged var added: Date
+    @NSManaged var activity: Date
     @NSManaged var finished: Bool
     @NSManaged var service: TransmissionService
 }

@@ -91,8 +91,8 @@ public struct Torrent {
         public let tier: Int
     }
 
-    public let activityDate: Int
-    public let addedDate: Int
+    public let activityDate: Date
+    public let addedDate: Date
     public let bandwidthPriority: Int
     public let comment: String
     public let corruptEver: Int

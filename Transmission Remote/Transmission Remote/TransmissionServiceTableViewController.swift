@@ -26,7 +26,7 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
         let transmissionTorrentsFetchRequest: NSFetchRequest<TransmissionTorrent> = NSFetchRequest(entityName: "TransmissionTorrent")
 
         transmissionTorrentsFetchRequest.predicate = NSPredicate(format: "service == %@", self.transmissionService)
-        transmissionTorrentsFetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+        transmissionTorrentsFetchRequest.sortDescriptors = [NSSortDescriptor(key: "added", ascending: false)]
 
         var fetchedResultsController = NSFetchedResultsController(fetchRequest: transmissionTorrentsFetchRequest,
                                                                   managedObjectContext: self.transmissionService.managedObjectContext!,
@@ -59,7 +59,11 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
         self.activityIndicator.center = self.view.center
         self.view.addSubview(activityIndicator)
 
-        self.transmissionService.refreshTorrents() {}
+        self.transmissionService.refreshTorrents() {
+            DispatchQueue.main.async{
+                self.activityIndicator.stopAnimating()
+            }
+        }
     }
 
     // MARK: - Table view data source
@@ -131,7 +135,6 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
     }
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        self.activityIndicator.stopAnimating()
         tableView.endUpdates()
     }
 
@@ -146,8 +149,12 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
     }
 
     @objc func pulledToRefresh(refreshControl: UIRefreshControl) {
-        if(self.isFiltering == false) {
-            self.transmissionService.refreshTorrents() {}
+        guard self.isFiltering == false else { return }
+
+        self.transmissionService.refreshTorrents() {
+            DispatchQueue.main.async{
+                self.activityIndicator.stopAnimating()
+            }
         }
 
         refreshControl.endRefreshing()
