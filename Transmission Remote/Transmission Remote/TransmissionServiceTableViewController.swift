@@ -30,7 +30,7 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
 
         var fetchedResultsController = NSFetchedResultsController(fetchRequest: transmissionTorrentsFetchRequest,
                                                                   managedObjectContext: self.transmissionService.managedObjectContext!,
-                                                                  sectionNameKeyPath: nil,
+                                                                  sectionNameKeyPath: "finished",
                                                                   cacheName: nil)
 
         fetchedResultsController.delegate = self
@@ -153,13 +153,30 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
         refreshControl.endRefreshing()
     }
 
+    @IBAction func addTorrentBarButtonItemPressed(sender: UIBarButtonItem) {
+        let documentPickerViewController = UIDocumentPickerViewController(documentTypes: ["public.data"], in: .import)
+
+        documentPickerViewController.delegate = self
+        documentPickerViewController.modalPresentationStyle = .fullScreen
+
+        self.present(documentPickerViewController, animated: true, completion: nil)
+    }
 }
 
 extension TransmissionServiceTableViewController: UISearchResultsUpdating {
-  func updateSearchResults(for searchController: UISearchController) {
-    let searchBar = self.searchController.searchBar
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = self.searchController.searchBar
 
-    self.filterTorrentsByTitle(title: searchBar.text!)
-  }
+        self.filterTorrentsByTitle(title: searchBar.text!)
+    }
+}
 
+extension TransmissionServiceTableViewController: UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard let torrentURL = urls.first else { return }
+
+        self.transmissionService.addTorrent(url: torrentURL) {}
+    }
+
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {}
 }

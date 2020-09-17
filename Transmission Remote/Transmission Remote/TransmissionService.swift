@@ -20,6 +20,18 @@ public class TransmissionService: NSManagedObject {
     @NSManaged var uuid: UUID
     @NSManaged var torrents: [TransmissionTorrent]
 
+    lazy var client: Client = {
+        var credentials: Credentials?
+
+        if let keychainData = Keychain.load(key: self.uuid.uuidString) {
+            do {
+                credentials = try JSONDecoder().decode(Credentials.self, from: keychainData)
+            } catch {}
+        }
+
+         return Client(host: host, port: port, credentials: credentials)
+    }()
+
     func addCredentials(username: String, password: String) {
         let credentials = Credentials(username: username, password: password)
 
@@ -44,42 +56,22 @@ public class TransmissionService: NSManagedObject {
         }
     }
 
-    private func getTorrents(completion: @escaping (Result<[Torrent], Error>) -> Void) {
-        var credentials: Credentials?
-
-        if let keychainData = Keychain.load(key: self.uuid.uuidString) {
-            do {
-                credentials = try JSONDecoder().decode(Credentials.self, from: keychainData)
-            } catch {}
-        }
-
-        let transmissionClient = Client(host: host, port: port, credentials: credentials)
-
-        transmissionClient.make(request: Torrents.getTorrents(), completion: { (result) in
+    func refreshTorrents(completion: @escaping () -> Void) {
+        self.client.make(request: Torrents.getTorrents(), completion: { (result) in
             switch result {
             case .success(let result):
-                completion(.success(result.arguments.torrents))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        })
-    }
-
-    func refreshTorrents(completion: @escaping () -> Void) {
-        self.getTorrents { (result) in
-            switch result {
-            case .success(let torrents):
                 for transmissionTorrent in self.torrents {
                     self.managedObjectContext?.delete(transmissionTorrent)
                 }
 
-                for torrent in torrents {
+                for torrent in result.arguments.torrents {
                     guard
                         let transmissionTorrent = NSEntityDescription.insertNewObject(forEntityName: "TransmissionTorrent", into: self.managedObjectContext!) as? TransmissionTorrent
                         else { fatalError("Failed to initialize NSEntityDescription: TransmissionTorrent") }
 
                     transmissionTorrent.id = "\(torrent.id)"
                     transmissionTorrent.name = torrent.name
+                    transmissionTorrent.finished = torrent.isFinished
                     transmissionTorrent.service = self
                 }
 
@@ -90,11 +82,30 @@ public class TransmissionService: NSManagedObject {
                 }
 
             case .failure(let error):
-                print(error.localizedDescription)
+                print("\(error.localizedDescription)")
             }
 
             completion()
+        })
+    }
+
+    func addTorrent(url: URL, completion: () -> Void) {
+        do {
+            let encodedTorrent = try Data(contentsOf: url).base64EncodedString()
+
+            self.client.make(request: Torrents.addTorrent(encodedTorrent), completion: { (result) in
+                switch result {
+                case .success(let result):
+                    break
+                case .failure(let error):
+                    print("\(error.localizedDescription)")
+                }
+            })
+        } catch {
+            fatalError("Failed to encode torrent data: \(error.localizedDescription)")
         }
+
+        completion()
     }
 
     override public func prepareForDeletion() {

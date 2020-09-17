@@ -90,11 +90,16 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Torrents" id="Y76-Si-8oX">
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="A51-CU-RfW"/>
+                            <barButtonItem systemItem="add" id="A51-CU-RfW">
+                                <connections>
+                                    <action selector="addTorrentBarButtonItemPressedWithSender:" destination="jnS-vQ-srL" id="f1n-XX-uQe"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem title="Filter" id="dHT-VW-UlF"/>
                         </rightBarButtonItems>
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Swn-Nu-Koq">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
@@ -174,7 +179,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vFD-wl-MFn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="934.78260869565224" y="-571.20535714285711"/>
+            <point key="canvasLocation" x="935" y="-592"/>
         </scene>
         <!--Add Transmission Service View Controller-->
         <scene sceneID="7gD-YU-fRQ">
@@ -324,7 +329,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qiy-pl-9Yd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="rlU-eJ-336" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1845" y="-571"/>
+            <point key="canvasLocation" x="1845" y="-592"/>
         </scene>
         <!--Edit Transmission Service View Controller-->
         <scene sceneID="imn-q2-Kow">
@@ -477,7 +482,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xMh-QB-K63" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="5hI-hF-FyL" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1845" y="-1258"/>
+            <point key="canvasLocation" x="1845" y="-1304"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2zj-3f-OxJ">
@@ -496,7 +501,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DNs-Xe-67z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="935" y="-1258"/>
+            <point key="canvasLocation" x="935" y="-1304"/>
         </scene>
     </scenes>
 </document>
