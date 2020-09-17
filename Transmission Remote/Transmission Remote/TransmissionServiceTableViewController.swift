@@ -46,6 +46,7 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.definesPresentationContext = true
 
         self.searchController.searchResultsUpdater = self

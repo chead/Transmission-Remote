@@ -12,12 +12,13 @@
         <attribute name="activity" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="added" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="finished" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="hashString" attributeType="String"/>
         <attribute name="id" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
         <relationship name="service" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TransmissionService" inverseName="torrents" inverseEntity="TransmissionService"/>
     </entity>
     <elements>
         <element name="TransmissionService" positionX="-134.2578125" positionY="-216.19921875" width="128" height="133"/>
-        <element name="TransmissionTorrent" positionX="70.71484375" positionY="-131.453125" width="128" height="133"/>
+        <element name="TransmissionTorrent" positionX="70.71484375" positionY="-131.453125" width="128" height="148"/>
     </elements>
 </model>

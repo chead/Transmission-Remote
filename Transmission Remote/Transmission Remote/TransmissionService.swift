@@ -60,21 +60,43 @@ public class TransmissionService: NSManagedObject {
         self.client.make(request: Torrents.getTorrents(), completion: { (result) in
             switch result {
             case .success(let result):
-                for transmissionTorrent in self.torrents {
-                    self.managedObjectContext?.delete(transmissionTorrent)
+                for localTorrent in self.torrents {
+                    var deleteTorrent = true
+
+                    for remoteTorrent in result.arguments.torrents {
+                        if(localTorrent.hashString == remoteTorrent.hashString) {
+                            deleteTorrent = false
+                        }
+                    }
+
+                    if(deleteTorrent == true) {
+                        self.managedObjectContext?.delete(localTorrent)
+                    }
                 }
 
-                for torrent in result.arguments.torrents {
-                    guard
-                        let transmissionTorrent = NSEntityDescription.insertNewObject(forEntityName: "TransmissionTorrent", into: self.managedObjectContext!) as? TransmissionTorrent
-                        else { fatalError("Failed to initialize NSEntityDescription: TransmissionTorrent") }
+                for remoteTorrent in result.arguments.torrents {
 
-                    transmissionTorrent.id = "\(torrent.id)"
-                    transmissionTorrent.name = torrent.name
-                    transmissionTorrent.finished = torrent.isFinished
-                    transmissionTorrent.service = self
-                    transmissionTorrent.added = torrent.addedDate
-                    transmissionTorrent.activity = torrent.activityDate
+                    var addTorrent = true
+
+                    for localTorrent in self.torrents {
+                        if(remoteTorrent.hashString == localTorrent.hashString) {
+                            addTorrent = false
+                        }
+                    }
+
+                    if(addTorrent == true) {
+                        guard
+                            let localTorrent = NSEntityDescription.insertNewObject(forEntityName: "TransmissionTorrent", into: self.managedObjectContext!) as? TransmissionTorrent
+                            else { fatalError("Failed to initialize NSEntityDescription: TransmissionTorrent") }
+
+                        localTorrent.id = "\(remoteTorrent.id)"
+                        localTorrent.hashString = remoteTorrent.hashString
+                        localTorrent.name = remoteTorrent.name
+                        localTorrent.finished = remoteTorrent.isFinished
+                        localTorrent.service = self
+                        localTorrent.added = remoteTorrent.addedDate
+                        localTorrent.activity = remoteTorrent.activityDate
+                    }
                 }
 
                 do {
