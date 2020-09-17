@@ -60,11 +60,7 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
 
         self.view.addSubview(activityIndicator)
 
-        self.transmissionService.refreshTorrents() {
-            DispatchQueue.main.async{
-                self.activityIndicator.stopAnimating()
-            }
-        }
+        self.refreshTorrents()
     }
 
     // MARK: - Table view data source
@@ -149,14 +145,18 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
         self.tableView.reloadData()
     }
 
-    @objc func pulledToRefresh(refreshControl: UIRefreshControl) {
-        guard self.isFiltering == false else { return }
-
+    func refreshTorrents() {
         self.transmissionService.refreshTorrents() {
             DispatchQueue.main.async{
                 self.activityIndicator.stopAnimating()
             }
         }
+    }
+
+    @objc func pulledToRefresh(refreshControl: UIRefreshControl) {
+        guard self.isFiltering == false else { return }
+
+        self.refreshTorrents()
 
         refreshControl.endRefreshing()
     }
@@ -184,11 +184,7 @@ extension TransmissionServiceTableViewController: UIDocumentPickerDelegate {
         guard let torrentURL = urls.first else { return }
 
         self.transmissionService.addTorrent(url: torrentURL) {
-            self.transmissionService.refreshTorrents() {
-                DispatchQueue.main.async{
-                    self.activityIndicator.stopAnimating()
-                }
-            }
+            self.refreshTorrents()
         }
     }
 
