@@ -175,7 +175,19 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
 
         self.present(documentPickerViewController, animated: true, completion: nil)
     }
+
+    @IBAction func sortBarButtonItemPressed(sender: UIBarButtonItem) {
+        self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: false)]
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            fatalError("Failed to initialize FetchedResultsController: \(error)")
+        }
+        self.tableView.reloadData()
+    }
 }
+
+
 
 extension TransmissionServiceTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
