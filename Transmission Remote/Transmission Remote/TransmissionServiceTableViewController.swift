@@ -10,39 +10,40 @@ import UIKit
 import CoreData
 import TransmissionKit
 
-class TransmissionServiceTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class TransmissionServiceTableViewController: UITableViewController {//}, NSFetchedResultsControllerDelegate {
 
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
     var transmissionService: TransmissionService!
-
+    var torrents: [Torrent] = []
     let searchController = UISearchController(searchResultsController: nil)
 
-    private var filteredTransmissionTorrents: [TransmissionTorrent] = []
+//    private var filteredTransmissionTorrents: [TransmissionTorrent] = []
+    private var filteredTorrents: [Torrent] = []
 
     private var isFiltering: Bool { return searchController.isActive && !(searchController.searchBar.text?.isEmpty ?? true) }
 
-    lazy var fetchedResultsController: NSFetchedResultsController<TransmissionTorrent> = {
-        let transmissionTorrentsFetchRequest: NSFetchRequest<TransmissionTorrent> = NSFetchRequest(entityName: "TransmissionTorrent")
-
-        transmissionTorrentsFetchRequest.predicate = NSPredicate(format: "service == %@", self.transmissionService)
-        transmissionTorrentsFetchRequest.sortDescriptors = [NSSortDescriptor(key: "added", ascending: false)]
-
-        var fetchedResultsController = NSFetchedResultsController(fetchRequest: transmissionTorrentsFetchRequest,
-                                                                  managedObjectContext: self.transmissionService.managedObjectContext!,
-                                                                  sectionNameKeyPath: nil,
-                                                                  cacheName: nil)
-
-        fetchedResultsController.delegate = self
-
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            fatalError("Failed to initialize FetchedResultsController: \(error)")
-        }
-
-        return fetchedResultsController
-    }()
+//    lazy var fetchedResultsController: NSFetchedResultsController<TransmissionTorrent> = {
+//        let transmissionTorrentsFetchRequest: NSFetchRequest<TransmissionTorrent> = NSFetchRequest(entityName: "TransmissionTorrent")
+//
+//        transmissionTorrentsFetchRequest.predicate = NSPredicate(format: "service == %@", self.transmissionService)
+//        transmissionTorrentsFetchRequest.sortDescriptors = [NSSortDescriptor(key: "added", ascending: false)]
+//
+//        var fetchedResultsController = NSFetchedResultsController(fetchRequest: transmissionTorrentsFetchRequest,
+//                                                                  managedObjectContext: self.transmissionService.managedObjectContext!,
+//                                                                  sectionNameKeyPath: nil,
+//                                                                  cacheName: nil)
+//
+//        fetchedResultsController.delegate = self
+//
+//        do {
+//            try fetchedResultsController.performFetch()
+//        } catch {
+//            fatalError("Failed to initialize FetchedResultsController: \(error)")
+//        }
+//
+//        return fetchedResultsController
+//    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,15 +71,18 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
         if(isFiltering) {
             return 1
         } else {
-            return self.fetchedResultsController.sections!.count
+            return 1
+//            return self.fetchedResultsController.sections!.count
         }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(isFiltering) {
-            return self.filteredTransmissionTorrents.count
+//            return self.filteredTransmissionTorrents.count
+            return self.filteredTorrents.count
         } else {
-            return self.fetchedResultsController.sections![section].numberOfObjects
+            return self.torrents.count
+//            return self.fetchedResultsController.sections![section].numberOfObjects
         }
     }
 
@@ -89,74 +93,96 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "transmissionTorrentTableViewCell", for: indexPath) as! TransmissionTorrentsTableViewCell
 
-        let transmissionTorrent: TransmissionTorrent
+//        let transmissionTorrent: TransmissionTorrent
+        let torrent: Torrent
 
         if(isFiltering) {
-            transmissionTorrent = self.filteredTransmissionTorrents[indexPath.row]
+            torrent = self.filteredTorrents[indexPath.row]
+//            transmissionTorrent = self.filteredTransmissionTorrents[indexPath.row]
+
         } else {
-            transmissionTorrent = self.fetchedResultsController.object(at: indexPath)
+            torrent = self.torrents[indexPath.row]
+//            transmissionTorrent = self.fetchedResultsController.object(at: indexPath)
+            
         }
 
-        cell.titleLabel.text = transmissionTorrent.name
-        cell.progressView.progress = transmissionTorrent.progress
+//        cell.titleLabel.text = transmissionTorrent.name
+//        cell.progressView.progress = transmissionTorrent.progress
+        cell.titleLabel.text = torrent.name
+        cell.progressView.progress = torrent.percentDone
 
         return cell
     }
 
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        switch type {
-        case .insert:
-            tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
-        case .delete:
-            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
-        case .move:
-            break
-        case .update:
-            break
-        @unknown default:
-            fatalError()
-        }
-    }
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
-        case .insert:
-            tableView.insertRows(at: [newIndexPath!], with: .fade)
-        case .delete:
-            tableView.deleteRows(at: [indexPath!], with: .fade)
-        case .update:
-            tableView.reloadRows(at: [indexPath!], with: .fade)
-        case .move:
-            tableView.moveRow(at: indexPath!, to: newIndexPath!)
-        @unknown default:
-            fatalError()
-        }
-    }
-
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        self.tableView.endUpdates()
-    }
+//    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        tableView.beginUpdates()
+//    }
+//
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+//        switch type {
+//        case .insert:
+//            tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+//        case .delete:
+//            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+//        case .move:
+//            break
+//        case .update:
+//            break
+//        @unknown default:
+//            fatalError()
+//        }
+//    }
+//
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//        switch type {
+//        case .insert:
+//            tableView.insertRows(at: [newIndexPath!], with: .fade)
+//        case .delete:
+//            tableView.deleteRows(at: [indexPath!], with: .fade)
+//        case .update:
+//            tableView.reloadRows(at: [indexPath!], with: .fade)
+//        case .move:
+//            tableView.moveRow(at: indexPath!, to: newIndexPath!)
+//        @unknown default:
+//            fatalError()
+//        }
+//    }
+//
+//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        self.tableView.endUpdates()
+//    }
 
     func filterTorrentsByTitle(title: String) {
-        guard let fetchedObjects = self.fetchedResultsController.fetchedObjects else { return }
+//        guard let fetchedObjects = self.fetchedResultsController.fetchedObjects else { return }
 
-        self.filteredTransmissionTorrents = fetchedObjects.filter({ (transmissionTorrent) -> Bool in
-            return transmissionTorrent.name.lowercased().contains(title.lowercased())
+//        self.filteredTransmissionTorrents = fetchedObjects.filter({ (transmissionTorrent) -> Bool in
+        self.filteredTorrents = self.torrents.filter({ (torrent) -> Bool in
+//            return transmissionTorrent.name.lowercased().contains(title.lowercased())
+            return torrent.name.lowercased().contains(title.lowercased())
         })
 
         self.tableView.reloadData()
     }
 
     func refreshTorrents() {
-        self.transmissionService.refreshTorrents() {
-            DispatchQueue.main.async{
-                self.activityIndicator.stopAnimating()
+        self.transmissionService.getTorrents { (result) in
+            switch result {
+            case .success(let torrents):
+                self.torrents = torrents
+
+                DispatchQueue.main.async{
+                    self.tableView.reloadData()
+                    self.activityIndicator.stopAnimating()
+                }
+            case .failure(_):
+                break
             }
         }
+//        self.transmissionService.refreshTorrents() {
+//            DispatchQueue.main.async{
+//                self.activityIndicator.stopAnimating()
+//            }
+//        }
     }
 
     @objc func pulledToRefresh(refreshControl: UIRefreshControl) {

@@ -56,6 +56,17 @@ public class TransmissionService: NSManagedObject {
         }
     }
 
+    func getTorrents(completion: @escaping (Result<[Torrent], Error>) -> Void) {
+        self.client.make(request: Torrents.getTorrents(), completion: { (result) in
+            switch result {
+            case .success(let result):
+                completion(.success(result.arguments.torrents))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        })
+    }
+
     func refreshTorrents(completion: @escaping () -> Void) {
         self.client.make(request: Torrents.getTorrents(), completion: { (result) in
             switch result {
