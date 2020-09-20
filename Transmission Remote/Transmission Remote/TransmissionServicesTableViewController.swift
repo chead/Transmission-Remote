@@ -36,13 +36,6 @@ class TransmissionServicesTableViewController: UITableViewController, NSFetchedR
         return fetchedResultsController
     }()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        //self.navigationItem.leftBarButtonItem = editButtonItem
-        //self.tableView.allowsSelectionDuringEditing = true
-    }
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

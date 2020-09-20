@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19G2021" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19G2021" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="TransmissionService" representedClassName="TransmissionService" syncable="YES">
         <attribute name="created" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="host" attributeType="String"/>
@@ -11,10 +11,10 @@
     <entity name="TransmissionTorrent" representedClassName="TransmissionTorrent" syncable="YES">
         <attribute name="activity" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="added" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="finished" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="hashString" attributeType="String"/>
         <attribute name="id" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
+        <attribute name="progress" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="service" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TransmissionService" inverseName="torrents" inverseEntity="TransmissionService"/>
     </entity>
     <elements>

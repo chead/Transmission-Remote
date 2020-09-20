@@ -61,30 +61,29 @@ public class TransmissionService: NSManagedObject {
             switch result {
             case .success(let result):
                 for localTorrent in self.torrents {
-                    var deleteTorrent = true
-
-                    for remoteTorrent in result.arguments.torrents {
-                        if(localTorrent.hashString == remoteTorrent.hashString) {
-                            deleteTorrent = false
-                        }
-                    }
-
-                    if(deleteTorrent == true) {
+//                    var deleteTorrent = true
+//
+//                    for remoteTorrent in result.arguments.torrents {
+//                        if(localTorrent.hashString == remoteTorrent.hashString) {
+//                            deleteTorrent = false
+//                        }
+//                    }
+//
+//                    if(deleteTorrent == true) {
                         self.managedObjectContext?.delete(localTorrent)
-                    }
+//                    }
                 }
 
                 for remoteTorrent in result.arguments.torrents {
-
-                    var addTorrent = true
-
-                    for localTorrent in self.torrents {
-                        if(remoteTorrent.hashString == localTorrent.hashString) {
-                            addTorrent = false
-                        }
-                    }
-
-                    if(addTorrent == true) {
+//                    var addTorrent = true
+//
+//                    for localTorrent in self.torrents {
+//                        if(remoteTorrent.hashString == localTorrent.hashString) {
+//                            addTorrent = false
+//                        }
+//                    }
+//
+//                    if(addTorrent == true) {
                         guard
                             let localTorrent = NSEntityDescription.insertNewObject(forEntityName: "TransmissionTorrent", into: self.managedObjectContext!) as? TransmissionTorrent
                             else { fatalError("Failed to initialize NSEntityDescription: TransmissionTorrent") }
@@ -92,11 +91,11 @@ public class TransmissionService: NSManagedObject {
                         localTorrent.id = "\(remoteTorrent.id)"
                         localTorrent.hashString = remoteTorrent.hashString
                         localTorrent.name = remoteTorrent.name
-                        localTorrent.finished = remoteTorrent.isFinished
+                        localTorrent.progress = remoteTorrent.percentDone
                         localTorrent.service = self
                         localTorrent.added = remoteTorrent.addedDate
                         localTorrent.activity = remoteTorrent.activityDate
-                    }
+//                    }
                 }
 
                 do {
@@ -119,7 +118,7 @@ public class TransmissionService: NSManagedObject {
 
             self.client.make(request: Torrents.addTorrent(encodedTorrent), completion: { (result) in
                 switch result {
-                case .success(let result):
+                case .success(_):
                     break
                 case .failure(let error):
                     print("\(error.localizedDescription)")

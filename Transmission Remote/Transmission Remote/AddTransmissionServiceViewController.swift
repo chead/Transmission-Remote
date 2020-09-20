@@ -29,17 +29,17 @@ class AddTransmissionServiceViewController: UIViewController {
 
     @IBAction func doneBarButtonItemPressed(sender: UIBarButtonItem) {
         guard
-            let transmissionService = NSEntityDescription.insertNewObject(forEntityName: "TransmissionService", into: self.managedObjectContext) as? TransmissionService
-        else {
-            fatalError("Failed to initialize NSEntityDescription: TransmissionService")
-        }
-
-        guard
             let serviceName = self.nameTextField.text,
             let serviceHost = self.hostTextField.text,
             let servicePort = self.portTextField.text
         else {
             return
+        }
+
+        guard
+            let transmissionService = NSEntityDescription.insertNewObject(forEntityName: "TransmissionService", into: self.managedObjectContext) as? TransmissionService
+        else {
+            fatalError("Failed to initialize NSEntityDescription: TransmissionService")
         }
 
         transmissionService.name = serviceName.isEmpty ? "Transmission" : serviceName

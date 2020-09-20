@@ -30,7 +30,7 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
 
         var fetchedResultsController = NSFetchedResultsController(fetchRequest: transmissionTorrentsFetchRequest,
                                                                   managedObjectContext: self.transmissionService.managedObjectContext!,
-                                                                  sectionNameKeyPath: "finished",
+                                                                  sectionNameKeyPath: nil,
                                                                   cacheName: nil)
 
         fetchedResultsController.delegate = self
@@ -65,7 +65,7 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
     }
 
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         if(isFiltering) {
             return 1
@@ -82,6 +82,10 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
         }
     }
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 64
+    }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "transmissionTorrentTableViewCell", for: indexPath) as! TransmissionTorrentsTableViewCell
 
@@ -93,7 +97,8 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
             transmissionTorrent = self.fetchedResultsController.object(at: indexPath)
         }
 
-        cell.title.text = transmissionTorrent.name
+        cell.titleLabel.text = transmissionTorrent.name
+        cell.progressView.progress = transmissionTorrent.progress
 
         return cell
     }

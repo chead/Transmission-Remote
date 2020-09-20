@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C21DC10725157C6B008E4ED6 /* TransmissionTorrentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21DC10625157C6B008E4ED6 /* TransmissionTorrentViewController.swift */; };
 		C23D02CC2492EB7D00B5D598 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D02CB2492EB7D00B5D598 /* LandingViewController.swift */; };
 		C24A103D245C994E0023D242 /* Transmission_Remote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C24A103B245C994E0023D242 /* Transmission_Remote.xcdatamodeld */; };
 		C251B3732244541500B2AA04 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C251B3722244541500B2AA04 /* AppDelegate.swift */; };
@@ -57,6 +58,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C21DC10625157C6B008E4ED6 /* TransmissionTorrentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionTorrentViewController.swift; sourceTree = "<group>"; };
 		C23D02CB2492EB7D00B5D598 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		C24A103C245C994E0023D242 /* Transmission_Remote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Transmission_Remote.xcdatamodel; sourceTree = "<group>"; };
 		C251B36F2244541500B2AA04 /* Transmission Remote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Transmission Remote.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +141,7 @@
 				C270A32C245127C500A1629B /* TransmissionServicesTableViewController.swift */,
 				C270A32E245127CE00A1629B /* TransmissionServiceTableViewController.swift */,
 				C266E52B2503614F002E35DA /* TransmissionTorrentsTableViewCell.swift */,
+				C21DC10625157C6B008E4ED6 /* TransmissionTorrentViewController.swift */,
 				C266E52725033C42002E35DA /* Keychain.swift */,
 				C251B3722244541500B2AA04 /* AppDelegate.swift */,
 				C251B3762244541500B2AA04 /* Main.storyboard */,
@@ -314,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C288164324F8AF9A002DFC9C /* AddTransmissionServiceViewController.swift in Sources */,
+				C21DC10725157C6B008E4ED6 /* TransmissionTorrentViewController.swift in Sources */,
 				C2BF7A7524FE06D9005C0258 /* TransmissionService.swift in Sources */,
 				C24A103D245C994E0023D242 /* Transmission_Remote.xcdatamodeld in Sources */,
 				C270A32D245127C500A1629B /* TransmissionServicesTableViewController.swift in Sources */,
@@ -505,7 +509,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.chead.Transmission-Remote";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.chead.Transmission-Remote-Mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -523,7 +527,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.chead.Transmission-Remote";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.chead.Transmission-Remote-Mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

@@ -9,7 +9,8 @@
 import UIKit
 
 class TransmissionTorrentsTableViewCell: UITableViewCell {
-    @IBOutlet var title: UILabel!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var progressView: UIProgressView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
