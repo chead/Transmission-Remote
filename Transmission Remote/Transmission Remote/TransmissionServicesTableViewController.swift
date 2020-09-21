@@ -110,7 +110,6 @@ class TransmissionServicesTableViewController: UITableViewController, NSFetchedR
             let editTransmissionServiceNavigationController = segue.destination as! UINavigationController
             let editTransmissionServiceViewController = editTransmissionServiceNavigationController.viewControllers.first as! EditTransmissionServiceViewController
 
-            editTransmissionServiceViewController.managedObjectContext = self.fetchedResultsController.managedObjectContext
             editTransmissionServiceViewController.transmissionService = self.selectedTransmissionService
 
         case "showTransmissionTorrentsTableViewController":

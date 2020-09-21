@@ -589,7 +589,11 @@
                                 <segue destination="5hI-hF-FyL" kind="unwind" identifier="unwindToTransmissionServicesTableViewController" unwindAction="unwindToTransmissionServicesTableViewControllerWithSegue:" id="qvz-DY-Nbr"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="done" id="cSK-YJ-Pa1"/>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="done" id="cSK-YJ-Pa1">
+                            <connections>
+                                <action selector="doneBarButtonItemPressedWithSender:" destination="uy1-op-xrI" id="ckW-qv-znu"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="cancelBarButtonItem" destination="cTj-5H-Gzb" id="KYx-MG-p4u"/>

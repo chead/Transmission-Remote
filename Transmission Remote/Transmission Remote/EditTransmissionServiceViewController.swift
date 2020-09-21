@@ -11,7 +11,6 @@ import CoreData
 import TransmissionKit
 
 class EditTransmissionServiceViewController: UIViewController {
-    var managedObjectContext: NSManagedObjectContext!
     var transmissionService: TransmissionService!
 
     @IBOutlet var nameTextField: UITextField!
@@ -55,7 +54,7 @@ class EditTransmissionServiceViewController: UIViewController {
         self.transmissionService.port = servicePort.isEmpty ? "9091" : servicePort
 
         do {
-            try self.managedObjectContext.save()
+            try self.transmissionService.managedObjectContext?.save()
         } catch {
             fatalError("Failed to save NSManagedObjectContext: \(error.localizedDescription)")
         }
@@ -80,10 +79,12 @@ class EditTransmissionServiceViewController: UIViewController {
         let alert = UIAlertController(title: "Delete?", message: "Delete this Transmission Service?", preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { action in
-            self.managedObjectContext.delete(self.transmissionService)
+            let managedObjectContext = self.transmissionService.managedObjectContext
+
+            managedObjectContext?.delete(self.transmissionService)
 
             do {
-                try self.managedObjectContext.save()
+                try managedObjectContext?.save()
             } catch {
                 fatalError("Failed to save NSManagedObjectContext: \(error.localizedDescription)")
             }
