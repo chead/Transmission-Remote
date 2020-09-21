@@ -91,4 +91,7 @@ class TransmissionTorrentTableViewController: UITableViewController {
     }
     */
 
+    @IBAction func stopButtonTouched(sender: UIButton) {
+        self.transmissionTorrent.stop()
+    }
 }

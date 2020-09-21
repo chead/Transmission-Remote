@@ -102,16 +102,16 @@ public enum Torrents {
         return self.getTorrents(ids: nil)
     }
 
+    public static func getTorrent(id: TorrentIdentifier) -> Request<GetTorrentsRequest, GetTorrentsResponse> {
+        return self.getTorrents(ids: .identifiers([id]))
+    }
+
     public static func getTorrents(ids: TorrentSet?) -> Request<GetTorrentsRequest, GetTorrentsResponse> {
         let torrents = GetTorrentsRequest(ids: ids)
 
         let request = Request<GetTorrentsRequest, GetTorrentsResponse>(method: "torrent-get", arguments: torrents)
 
         return request
-    }
-
-    public static func getTorrent(id: TorrentIdentifier) -> Request<GetTorrentsRequest, GetTorrentsResponse> {
-        return self.getTorrents(ids: .identifiers([id]))
     }
 
     public struct AddTorrentRequest: Encodable {
@@ -158,4 +158,38 @@ public enum Torrents {
 
         return request
     }
+
+    public struct StartTorrentsRequest: Encodable {
+        let ids: TorrentSet?
+    }
+
+    public static func startTorrents() -> Request<StartTorrentsRequest, None> {
+        return self.startTorrents(ids: nil)
+    }
+
+    public static func startTorrent(id: TorrentIdentifier) -> Request<StartTorrentsRequest, None> {
+        return self.startTorrents(ids: .identifiers([id]))
+    }
+
+    public static func startTorrents(ids: TorrentSet?) -> Request<StartTorrentsRequest, None> {
+        return Request<StartTorrentsRequest, None>(method: "torrent-stop", arguments: StartTorrentsRequest(ids: ids))
+    }
+
+    public struct StopTorrentsRequest: Encodable {
+        let ids: TorrentSet?
+    }
+
+    public static func stopTorrents() -> Request<StopTorrentsRequest, None> {
+        return self.stopTorrents(ids: nil)
+    }
+
+    public static func stopTorrent(id: TorrentIdentifier) -> Request<StopTorrentsRequest, None> {
+        return self.stopTorrents(ids: .identifiers([id]))
+    }
+
+    public static func stopTorrents(ids: TorrentSet?) -> Request<StopTorrentsRequest, None> {
+        return Request<StopTorrentsRequest, None>(method: "torrent-stop", arguments: StopTorrentsRequest(ids: ids))
+    }
+
+
 }

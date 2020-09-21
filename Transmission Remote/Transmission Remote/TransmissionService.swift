@@ -88,7 +88,7 @@ public class TransmissionService: NSManagedObject {
                             let localTorrent = NSEntityDescription.insertNewObject(forEntityName: "TransmissionTorrent", into: self.managedObjectContext!) as? TransmissionTorrent
                             else { fatalError("Failed to initialize NSEntityDescription: TransmissionTorrent") }
 
-                        localTorrent.id = "\(remoteTorrent.id)"
+                        localTorrent.id = remoteTorrent.id
                         localTorrent.hashString = remoteTorrent.hashString
                         localTorrent.name = remoteTorrent.name
                         localTorrent.progress = remoteTorrent.percentDone

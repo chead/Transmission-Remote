@@ -145,14 +145,26 @@
                                     <rect key="frame" x="12" y="12" width="390" height="234"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SFD-aT-d3y">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="234"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="20.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WuY-Rf-KGc">
-                                                    <rect key="frame" x="0.0" y="0.0" width="390" height="234"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="390" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                            </subviews>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lpM-Q2-8ir">
+                                            <rect key="frame" x="0.0" y="20.5" width="390" height="213.5"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4WU-vz-o0q">
+                                                    <rect key="frame" x="0.0" y="0.0" width="390" height="213.5"/>
+                                                    <state key="normal" title="Stop"/>
+                                                    <connections>
+                                                        <action selector="stopButtonTouchedWithSender:" destination="MIj-RP-vtf" eventType="touchUpInside" id="TLe-Xp-91E"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </stackView>
                                     </subviews>
