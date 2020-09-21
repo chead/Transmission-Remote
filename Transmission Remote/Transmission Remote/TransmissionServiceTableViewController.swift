@@ -19,6 +19,7 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
     let searchController = UISearchController(searchResultsController: nil)
 
     private var filteredTransmissionTorrents: [TransmissionTorrent] = []
+    private var selectedTransmissionTorrent: TransmissionTorrent!
 
     private var isFiltering: Bool { return searchController.isActive && !(searchController.searchBar.text?.isEmpty ?? true) }
 
@@ -89,18 +90,18 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "transmissionTorrentTableViewCell", for: indexPath) as! TransmissionTorrentsTableViewCell
 
-        let transmissionTorrent: TransmissionTorrent
-
-        if(isFiltering) {
-            transmissionTorrent = self.filteredTransmissionTorrents[indexPath.row]
-        } else {
-            transmissionTorrent = self.fetchedResultsController.object(at: indexPath)
-        }
+        let transmissionTorrent = self.transmissionTorrent(for: indexPath)
 
         cell.titleLabel.text = transmissionTorrent.name
         cell.progressView.progress = transmissionTorrent.progress
 
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selectedTransmissionTorrent = self.transmissionTorrent(for: indexPath)
+
+        self.performSegue(withIdentifier: "showTransmissionTorrentTableViewController", sender: self)
     }
 
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -141,6 +142,24 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
         self.tableView.endUpdates()
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch(segue.identifier) {
+        case "showTransmissionTorrentTableViewController":
+            let transmissionTorrentTableViewController = segue.destination as! TransmissionTorrentTableViewController
+
+            transmissionTorrentTableViewController.transmissionTorrent = self.selectedTransmissionTorrent
+
+            break
+//            let addTransmissionServiceNavigationController = segue.destination as! UINavigationController
+//            let addTransmissionServiceViewController = addTransmissionServiceNavigationController.viewControllers.first as! AddTransmissionServiceViewController
+//
+//            addTransmissionServiceViewController.managedObjectContext = self.fetchedResultsController.managedObjectContext
+
+        default:
+            break
+        }
+    }
+
     func filterTorrentsByTitle(title: String) {
         guard let fetchedObjects = self.fetchedResultsController.fetchedObjects else { return }
 
@@ -157,6 +176,18 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
                 self.activityIndicator.stopAnimating()
             }
         }
+    }
+
+    func transmissionTorrent(for indexPath: IndexPath) -> TransmissionTorrent {
+        let transmissionTorrent: TransmissionTorrent
+
+        if(self.isFiltering == true) {
+            transmissionTorrent = self.filteredTransmissionTorrents[indexPath.row]
+        } else {
+            transmissionTorrent = self.fetchedResultsController.object(at: indexPath)
+        }
+
+        return transmissionTorrent
     }
 
     @objc func pulledToRefresh(refreshControl: UIRefreshControl) {

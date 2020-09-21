@@ -70,13 +70,13 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="gVx-Ja-x8m">
                                                             <rect key="frame" x="0.0" y="18" width="366" height="36.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pio-gd-n9W">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pio-gd-n9W">
                                                                     <rect key="frame" x="0.0" y="0.0" width="366" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pFG-9v-tPs">
+                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pFG-9v-tPs">
                                                                     <rect key="frame" x="0.0" y="32.5" width="366" height="4"/>
                                                                 </progressView>
                                                             </subviews>
@@ -118,7 +118,7 @@
                     </refreshControl>
                     <connections>
                         <outlet property="activityIndicator" destination="n8Q-G5-6cZ" id="7QB-JK-Y98"/>
-                        <segue destination="w2Z-pB-eIL" kind="show" identifier="showTransmissionTorrentViewController" id="OaD-9A-7qE"/>
+                        <segue destination="MIj-RP-vtf" kind="show" identifier="showTransmissionTorrentTableViewController" id="5GQ-3m-b3d"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wH9-DD-jWd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -129,26 +129,10 @@
             </objects>
             <point key="canvasLocation" x="1844.9275362318842" y="109.82142857142857"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="T1W-25-kNF">
-            <objects>
-                <viewController id="w2Z-pB-eIL" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="4NZ-Yh-tWi">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="N3n-b7-OBV"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="y6L-qw-QJF"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dhJ-wC-5AK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2729" y="110"/>
-        </scene>
-        <!--Table View Controller-->
+        <!--Transmission Torrent Table View Controller-->
         <scene sceneID="PH1-B5-zvz">
             <objects>
-                <tableViewController id="MIj-RP-vtf" sceneMemberID="viewController">
+                <tableViewController id="MIj-RP-vtf" customClass="TransmissionTorrentTableViewController" customModule="Transmission_Remote" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="avc-EL-Hnk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -156,7 +140,31 @@
                         <view key="tableHeaderView" contentMode="scaleToFill" id="Kum-55-LhP">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="258"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="S7K-CM-pO0">
+                                    <rect key="frame" x="12" y="12" width="390" height="234"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SFD-aT-d3y">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="234"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WuY-Rf-KGc">
+                                                    <rect key="frame" x="0.0" y="0.0" width="390" height="234"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="S7K-CM-pO0" secondAttribute="bottom" constant="12" id="Cjh-Vd-MUf"/>
+                                <constraint firstItem="S7K-CM-pO0" firstAttribute="top" secondItem="Kum-55-LhP" secondAttribute="top" constant="12" id="cE6-KF-tf0"/>
+                                <constraint firstItem="S7K-CM-pO0" firstAttribute="leading" secondItem="Kum-55-LhP" secondAttribute="leading" constant="12" id="hxQ-v4-xeh"/>
+                                <constraint firstAttribute="trailing" secondItem="S7K-CM-pO0" secondAttribute="trailing" constant="12" id="lss-uY-7uR"/>
+                            </constraints>
                         </view>
                         <sections>
                             <tableViewSection id="M9W-r6-GQG">
@@ -220,10 +228,14 @@
                             <outlet property="delegate" destination="MIj-RP-vtf" id="7bs-mC-HNe"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="9cD-6N-KHB"/>
+                    <connections>
+                        <outlet property="nameLabel" destination="WuY-Rf-KGc" id="h9Z-lJ-Wf2"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qba-hv-jKh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3587" y="110"/>
+            <point key="canvasLocation" x="2832" y="110"/>
         </scene>
         <!--Transmission Services-->
         <scene sceneID="T6K-kT-kGL">
@@ -261,7 +273,7 @@
                         <barButtonItem key="leftBarButtonItem" id="RN8-94-nD6"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="xVM-5z-BCc">
                             <connections>
-                                <segue destination="LiA-82-K1b" kind="presentation" identifier="presentaAddTransmissionServiceViewController" modalPresentationStyle="fullScreen" id="ilb-zN-nSa"/>
+                                <segue destination="LiA-82-K1b" kind="presentation" identifier="presentAddTransmissionServiceViewController" modalPresentationStyle="fullScreen" id="ilb-zN-nSa"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -100,7 +100,7 @@ class TransmissionServicesTableViewController: UITableViewController, NSFetchedR
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch(segue.identifier) {
-        case "presentaAddTransmissionServiceViewController":
+        case "presentAddTransmissionServiceViewController":
             let addTransmissionServiceNavigationController = segue.destination as! UINavigationController
             let addTransmissionServiceViewController = addTransmissionServiceNavigationController.viewControllers.first as! AddTransmissionServiceViewController
 
