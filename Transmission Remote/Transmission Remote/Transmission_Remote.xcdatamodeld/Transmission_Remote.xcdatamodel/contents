@@ -15,10 +15,11 @@
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="progress" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="status" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="service" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TransmissionService" inverseName="torrents" inverseEntity="TransmissionService"/>
     </entity>
     <elements>
         <element name="TransmissionService" positionX="-134.2578125" positionY="-216.19921875" width="128" height="133"/>
-        <element name="TransmissionTorrent" positionX="70.71484375" positionY="-131.453125" width="128" height="148"/>
+        <element name="TransmissionTorrent" positionX="70.71484375" positionY="-131.453125" width="128" height="163"/>
     </elements>
 </model>

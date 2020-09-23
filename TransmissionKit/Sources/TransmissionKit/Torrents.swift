@@ -172,7 +172,7 @@ public enum Torrents {
     }
 
     public static func startTorrents(ids: TorrentSet?) -> Request<StartTorrentsRequest, None> {
-        return Request<StartTorrentsRequest, None>(method: "torrent-stop", arguments: StartTorrentsRequest(ids: ids))
+        return Request<StartTorrentsRequest, None>(method: "torrent-start", arguments: StartTorrentsRequest(ids: ids))
     }
 
     public struct StopTorrentsRequest: Encodable {
@@ -190,6 +190,4 @@ public enum Torrents {
     public static func stopTorrents(ids: TorrentSet?) -> Request<StopTorrentsRequest, None> {
         return Request<StopTorrentsRequest, None>(method: "torrent-stop", arguments: StopTorrentsRequest(ids: ids))
     }
-
-
 }

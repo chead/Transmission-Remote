@@ -95,6 +95,17 @@ public class TransmissionService: NSManagedObject {
                         localTorrent.service = self
                         localTorrent.added = remoteTorrent.addedDate
                         localTorrent.activity = remoteTorrent.activityDate
+
+                        switch remoteTorrent.status {
+                        case .stopped: localTorrent.status = .stopped
+                        case .checkingQueued: localTorrent.status = .checkingQueued
+                        case .checking: localTorrent.status = .checking
+                        case .downloadingQueued: localTorrent.status = .downloadingQueued
+                        case .downloading: localTorrent.status = .downloading
+                        case .seedingQueued: localTorrent.status = .seedingQueued
+                        case .seeding: localTorrent.status = .seeding
+                        }
+
 //                    }
                 }
 
@@ -112,19 +123,23 @@ public class TransmissionService: NSManagedObject {
         })
     }
 
-    func addTorrent(url: URL, completion: @escaping () -> Void) {
+    func addTorrent(url: URL, completion: @escaping (Bool) -> Void) {
         do {
             let encodedTorrent = try Data(contentsOf: url).base64EncodedString()
 
             self.client.make(request: Torrents.addTorrent(encodedTorrent), completion: { (result) in
                 switch result {
-                case .success(_):
-                    break
+                case .success(let response):
+                    switch(response.arguments) {
+                    case .added(_):
+                        completion(true)
+                    case .duplicate(_):
+                        completion(false)
+                    }
                 case .failure(let error):
+                    completion(false)
                     print("\(error.localizedDescription)")
                 }
-
-                completion()
             })
         } catch {
             fatalError("Failed to encode torrent data: \(error.localizedDescription)")

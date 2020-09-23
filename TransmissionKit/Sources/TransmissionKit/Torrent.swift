@@ -8,6 +8,16 @@
 import Foundation
 
 public struct Torrent {
+    public enum Status: Int, Decodable {
+        case stopped = 0
+        case checkingQueued
+        case checking
+        case downloadingQueued
+        case downloading
+        case seedingQueued
+        case seeding
+    }
+
     public struct File: Decodable {
         public let bytesCompleted: Int
         public let length: Int
@@ -147,7 +157,7 @@ public struct Torrent {
     public let seedRatioMode: Int
     public let sizeWhenDone: Int
     public let startDate: Int
-    public let status: Int
+    public let status: Status
     public let trackers: [Tracker]
     public let trackerStats: [TrackerStatistics]
     public let totalSize: Int

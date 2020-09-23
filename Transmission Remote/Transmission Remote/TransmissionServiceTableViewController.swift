@@ -220,8 +220,10 @@ extension TransmissionServiceTableViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         guard let torrentURL = urls.first else { return }
 
-        self.transmissionService.addTorrent(url: torrentURL) {
-            self.refreshTorrents()
+        self.transmissionService.addTorrent(url: torrentURL) { (added) in
+            if(added == true) {
+                self.refreshTorrents()
+            }
         }
     }
 

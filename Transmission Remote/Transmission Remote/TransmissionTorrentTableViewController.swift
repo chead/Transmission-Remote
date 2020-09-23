@@ -12,11 +12,15 @@ class TransmissionTorrentTableViewController: UITableViewController {
     var transmissionTorrent: TransmissionTorrent!
 
     @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var startButton: UIButton!
+    @IBOutlet var stopButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.nameLabel.text = self.transmissionTorrent.name
+
+        self.setStartStopButtons(started: self.transmissionTorrent.status != .stopped)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -91,7 +95,22 @@ class TransmissionTorrentTableViewController: UITableViewController {
     }
     */
 
+    func setStartStopButtons(started: Bool) {
+        DispatchQueue.main.async {
+            self.startButton.isHidden = started
+            self.stopButton.isHidden = !started
+        }
+    }
+
+    @IBAction func startButtonTouched(sender: UIButton) {
+        self.transmissionTorrent.start { (started) in
+            self.setStartStopButtons(started: started)
+        }
+    }
+
     @IBAction func stopButtonTouched(sender: UIButton) {
-        self.transmissionTorrent.stop()
+        self.transmissionTorrent.stop { (stopped) in
+            self.setStartStopButtons(started: !stopped)
+        }
     }
 }
