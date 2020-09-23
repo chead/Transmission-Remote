@@ -34,6 +34,36 @@ public class TransmissionTorrent: NSManagedObject {
     @NSManaged var service: TransmissionService
     @NSManaged var status: Status
 
+    func create(torrent: Torrent, service: TransmissionService, managedObjectContext: NSManagedObjectContext) -> TransmissionTorrent {
+        guard
+            let localTorrent = NSEntityDescription.insertNewObject(forEntityName: "TransmissionTorrent", into: self.managedObjectContext!) as? TransmissionTorrent
+            else { fatalError("Failed to initialize NSEntityDescription: TransmissionTorrent") }
+
+        self.setFields(torrent: torrent, service: service)
+
+        return localTorrent
+    }
+
+    private func setFields(torrent: Torrent, service: TransmissionService) {
+        self.id = torrent.id
+        self.hashString = torrent.hashString
+        self.name = torrent.name
+        self.progress = torrent.percentDone
+        self.service = service
+        self.added = torrent.addedDate
+        self.activity = torrent.activityDate
+
+        switch torrent.status {
+        case .stopped: self.status = .stopped
+        case .checkingQueued: self.status = .checkingQueued
+        case .checking: self.status = .checking
+        case .downloadingQueued: self.status = .downloadingQueued
+        case .downloading: self.status = .downloading
+        case .seedingQueued: self.status = .seedingQueued
+        case .seeding: self.status = .seeding
+        }
+    }
+
     func start(completion: @escaping (Bool) -> Void) {
         self.service.client.make(request: Torrents.startTorrent(id: .id(id)), completion: { (result) in
             switch result {
@@ -56,18 +86,13 @@ public class TransmissionTorrent: NSManagedObject {
         })
     }
 
-    func update() {
+    func update(completion: @escaping () -> Void) {
         self.service.client.make(request: Torrents.getTorrent(id: .id(id)), completion: { (result) in
             switch result {
             case .success(let result):
                 guard let remoteTorrent = result.arguments.torrents.first else { break }
 
-                self.id = remoteTorrent.id
-                self.hashString = remoteTorrent.hashString
-                self.name = remoteTorrent.name
-                self.progress = remoteTorrent.percentDone
-                self.added = remoteTorrent.addedDate
-                self.activity = remoteTorrent.activityDate
+                self.setFields(torrent: remoteTorrent, service: self.service)
 
                 do {
                     try self.managedObjectContext!.save()
@@ -79,6 +104,8 @@ public class TransmissionTorrent: NSManagedObject {
             case .failure(_):
                 break
             }
+
+            completion()
         })
     }
 }

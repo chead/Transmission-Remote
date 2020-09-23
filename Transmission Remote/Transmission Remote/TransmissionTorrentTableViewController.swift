@@ -18,6 +18,8 @@ class TransmissionTorrentTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.refreshControl?.addTarget(self, action: #selector(pulledToRefresh), for: UIControl.Event.valueChanged)
+
         self.nameLabel.text = self.transmissionTorrent.name
 
         self.setStartStopButtons(started: self.transmissionTorrent.status != .stopped)
@@ -94,6 +96,14 @@ class TransmissionTorrentTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+    @objc func pulledToRefresh(refreshControl: UIRefreshControl) {
+        self.transmissionTorrent.update {
+            self.setStartStopButtons(started: self.transmissionTorrent.status != .stopped)
+        }
+
+        refreshControl.endRefreshing()
+    }
 
     func setStartStopButtons(started: Bool) {
         DispatchQueue.main.async {
