@@ -34,14 +34,13 @@ public class TransmissionTorrent: NSManagedObject {
     @NSManaged var service: TransmissionService
     @NSManaged var status: Status
 
-    func create(torrent: Torrent, service: TransmissionService, managedObjectContext: NSManagedObjectContext) -> TransmissionTorrent {
-        guard
-            let localTorrent = NSEntityDescription.insertNewObject(forEntityName: "TransmissionTorrent", into: self.managedObjectContext!) as? TransmissionTorrent
-            else { fatalError("Failed to initialize NSEntityDescription: TransmissionTorrent") }
+    convenience init(torrent: Torrent, service: TransmissionService, managedObjectContext: NSManagedObjectContext) {
+        guard let transmissionTorrentEntity = NSEntityDescription.entity(forEntityName: "TransmissionTorrent", in: managedObjectContext)
+        else { fatalError("Failed to initialize NSEntityDescription: TransmissionTorrent") }
+
+        self.init(entity: transmissionTorrentEntity, insertInto: managedObjectContext)
 
         self.setFields(torrent: torrent, service: service)
-
-        return localTorrent
     }
 
     private func setFields(torrent: Torrent, service: TransmissionService) {

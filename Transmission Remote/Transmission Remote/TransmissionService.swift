@@ -61,52 +61,11 @@ public class TransmissionService: NSManagedObject {
             switch result {
             case .success(let result):
                 for localTorrent in self.torrents {
-//                    var deleteTorrent = true
-//
-//                    for remoteTorrent in result.arguments.torrents {
-//                        if(localTorrent.hashString == remoteTorrent.hashString) {
-//                            deleteTorrent = false
-//                        }
-//                    }
-//
-//                    if(deleteTorrent == true) {
-                        self.managedObjectContext?.delete(localTorrent)
-//                    }
+                    self.managedObjectContext?.delete(localTorrent)
                 }
 
                 for remoteTorrent in result.arguments.torrents {
-//                    var addTorrent = true
-//
-//                    for localTorrent in self.torrents {
-//                        if(remoteTorrent.hashString == localTorrent.hashString) {
-//                            addTorrent = false
-//                        }
-//                    }
-//
-//                    if(addTorrent == true) {
-                        guard
-                            let localTorrent = NSEntityDescription.insertNewObject(forEntityName: "TransmissionTorrent", into: self.managedObjectContext!) as? TransmissionTorrent
-                            else { fatalError("Failed to initialize NSEntityDescription: TransmissionTorrent") }
-
-                        localTorrent.id = remoteTorrent.id
-                        localTorrent.hashString = remoteTorrent.hashString
-                        localTorrent.name = remoteTorrent.name
-                        localTorrent.progress = remoteTorrent.percentDone
-                        localTorrent.service = self
-                        localTorrent.added = remoteTorrent.addedDate
-                        localTorrent.activity = remoteTorrent.activityDate
-
-                        switch remoteTorrent.status {
-                        case .stopped: localTorrent.status = .stopped
-                        case .checkingQueued: localTorrent.status = .checkingQueued
-                        case .checking: localTorrent.status = .checking
-                        case .downloadingQueued: localTorrent.status = .downloadingQueued
-                        case .downloading: localTorrent.status = .downloading
-                        case .seedingQueued: localTorrent.status = .seedingQueued
-                        case .seeding: localTorrent.status = .seeding
-                        }
-
-//                    }
+                    let _ = TransmissionTorrent(torrent: remoteTorrent, service: self, managedObjectContext: self.managedObjectContext!)
                 }
 
                 do {

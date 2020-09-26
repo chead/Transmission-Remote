@@ -11,23 +11,45 @@ import UIKit
 class TransmissionTorrentTableViewController: UITableViewController {
     var transmissionTorrent: TransmissionTorrent!
 
+//    case stopped = 0
+//    case checkingQueued
+//    case checking
+//    case downloadingQueued
+//    case downloading
+//    case seedingQueued
+//    case seeding
+
     @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var progressView: UIProgressView!
+    @IBOutlet var progressLabel: UILabel!
+    @IBOutlet var stoppedStatusLabel: UILabel!
+    @IBOutlet var checkingQueuedStatusLabel: UILabel!
+    @IBOutlet var checkingStatusLabel: UILabel!
+    @IBOutlet var downloadingQueuedStatusLabel: UILabel!
+    @IBOutlet var downloadingStatusLabel: UILabel!
+    @IBOutlet var seedingQueuedStatusLabel: UILabel!
+    @IBOutlet var seedingStatusLabel: UILabel!
     @IBOutlet var startButton: UIButton!
     @IBOutlet var stopButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.refreshControl?.addTarget(self, action: #selector(pulledToRefresh), for: UIControl.Event.valueChanged)
-
         self.nameLabel.text = self.transmissionTorrent.name
 
-        self.setStartStopButtons(started: self.transmissionTorrent.status != .stopped)
+        self.setFields()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+
+        self.setStartStopButtons(started: self.transmissionTorrent.status != .stopped)
+
+        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { (timer) in
+            self.update()
+        }
+
     }
 
     // MARK: - Table view data source
@@ -97,30 +119,65 @@ class TransmissionTorrentTableViewController: UITableViewController {
     }
     */
 
-    @objc func pulledToRefresh(refreshControl: UIRefreshControl) {
+    func update() {
         self.transmissionTorrent.update {
-            self.setStartStopButtons(started: self.transmissionTorrent.status != .stopped)
+            DispatchQueue.main.async {
+                self.setFields()
+            }
         }
+    }
 
-        refreshControl.endRefreshing()
+    func setFields() {
+        self.progressView.progress = self.transmissionTorrent.progress
+        self.progressLabel.text = "\(self.transmissionTorrent.progress * 100)%"
+        self.setStatusLabel(status: self.transmissionTorrent.status)
+    }
+
+    func setStatusLabel(status: TransmissionTorrent.Status) {
+        self.stoppedStatusLabel.isHidden = true
+        self.checkingQueuedStatusLabel.isHidden = true
+        self.checkingStatusLabel.isHidden = true
+        self.downloadingQueuedStatusLabel.isHidden = true
+        self.downloadingStatusLabel.isHidden = true
+        self.checkingQueuedStatusLabel.isHidden = true
+        self.checkingStatusLabel.isHidden = true
+
+        switch status {
+        case .stopped:
+            self.stoppedStatusLabel.isHidden = false
+        case .checkingQueued:
+            self.checkingQueuedStatusLabel.isHidden = false
+        case .checking:
+            self.checkingStatusLabel.isHidden = false
+        case .downloadingQueued:
+            self.downloadingQueuedStatusLabel.isHidden = false
+        case .downloading:
+            self.downloadingStatusLabel.isHidden = false
+        case .seedingQueued:
+            self.seedingQueuedStatusLabel.isHidden = false
+        case .seeding:
+            self.seedingStatusLabel.isHidden = false
+        }
     }
 
     func setStartStopButtons(started: Bool) {
-        DispatchQueue.main.async {
-            self.startButton.isHidden = started
-            self.stopButton.isHidden = !started
-        }
+        self.startButton.isHidden = started
+        self.stopButton.isHidden = !started
     }
 
     @IBAction func startButtonTouched(sender: UIButton) {
         self.transmissionTorrent.start { (started) in
-            self.setStartStopButtons(started: started)
+            DispatchQueue.main.async {
+                self.setStartStopButtons(started: started)
+            }
         }
     }
 
     @IBAction func stopButtonTouched(sender: UIButton) {
         self.transmissionTorrent.stop { (stopped) in
-            self.setStartStopButtons(started: !stopped)
+            DispatchQueue.main.async {
+                self.setStartStopButtons(started: !stopped)
+            }
         }
     }
 }
