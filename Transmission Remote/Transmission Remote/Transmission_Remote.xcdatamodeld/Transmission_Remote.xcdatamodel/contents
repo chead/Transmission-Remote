@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19G2021" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="TransmissionService" representedClassName="TransmissionService" syncable="YES">
         <attribute name="created" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="host" attributeType="String"/>
@@ -11,15 +11,21 @@
     <entity name="TransmissionTorrent" representedClassName="TransmissionTorrent" syncable="YES">
         <attribute name="activity" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="added" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="downloadLimit" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="downloadLimited" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="downloadRate" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="hashString" attributeType="String"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="progress" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="status" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="uploadLimit" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="uploadLimited" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="uploadRate" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="service" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TransmissionService" inverseName="torrents" inverseEntity="TransmissionService"/>
     </entity>
     <elements>
-        <element name="TransmissionService" positionX="-134.2578125" positionY="-216.19921875" width="128" height="133"/>
-        <element name="TransmissionTorrent" positionX="70.71484375" positionY="-131.453125" width="128" height="163"/>
+        <element name="TransmissionService" positionX="-134.2578125" positionY="-216.19921875" width="128" height="119"/>
+        <element name="TransmissionTorrent" positionX="70.71484375" positionY="-131.453125" width="128" height="239"/>
     </elements>
 </model>

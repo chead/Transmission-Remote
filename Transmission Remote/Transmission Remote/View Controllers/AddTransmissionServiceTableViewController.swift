@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import TransmissionKit
 
-class AddTransmissionServiceViewController: UIViewController {
+class AddTransmissionServiceTableViewController: UITableViewController {
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var hostTextField: UITextField!
     @IBOutlet var portTextField: UITextField!
@@ -27,7 +27,7 @@ class AddTransmissionServiceViewController: UIViewController {
         self.doneBarButtonItem.isEnabled = false
     }
 
-    @IBAction func doneBarButtonItemPressed(sender: UIBarButtonItem) {
+    @IBAction func addBarButtonItemPressed(sender: UIBarButtonItem) {
         guard
             let serviceName = self.nameTextField.text,
             let serviceHost = self.hostTextField.text,

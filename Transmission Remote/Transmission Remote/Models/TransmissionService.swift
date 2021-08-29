@@ -57,7 +57,7 @@ public class TransmissionService: NSManagedObject {
     }
 
     func refreshTorrents(completion: @escaping () -> Void) {
-        self.client.make(request: Torrents.getTorrents(), completion: { (result) in
+        self.client.make(request: Torrents.getTorrents()) { (result) in
             switch result {
             case .success(let result):
                 for localTorrent in self.torrents {
@@ -79,14 +79,14 @@ public class TransmissionService: NSManagedObject {
             }
 
             completion()
-        })
+        }
     }
 
     func addTorrent(url: URL, completion: @escaping (Bool) -> Void) {
         do {
             let encodedTorrent = try Data(contentsOf: url).base64EncodedString()
 
-            self.client.make(request: Torrents.addTorrent(encodedTorrent), completion: { (result) in
+            self.client.make(request: Torrents.addTorrent(encodedTorrent)) { (result) in
                 switch result {
                 case .success(let response):
                     switch(response.arguments) {
@@ -99,7 +99,7 @@ public class TransmissionService: NSManagedObject {
                     completion(false)
                     print("\(error.localizedDescription)")
                 }
-            })
+            }
         } catch {
             fatalError("Failed to encode torrent data: \(error.localizedDescription)")
         }

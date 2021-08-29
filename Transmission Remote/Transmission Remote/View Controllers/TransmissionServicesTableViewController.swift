@@ -102,13 +102,13 @@ class TransmissionServicesTableViewController: UITableViewController, NSFetchedR
         switch(segue.identifier) {
         case "presentAddTransmissionServiceViewController":
             let addTransmissionServiceNavigationController = segue.destination as! UINavigationController
-            let addTransmissionServiceViewController = addTransmissionServiceNavigationController.viewControllers.first as! AddTransmissionServiceViewController
+            let addTransmissionServiceViewController = addTransmissionServiceNavigationController.viewControllers.first as! AddTransmissionServiceTableViewController
 
             addTransmissionServiceViewController.managedObjectContext = self.fetchedResultsController.managedObjectContext
 
         case "presentEditTransmissionServiceViewController":
             let editTransmissionServiceNavigationController = segue.destination as! UINavigationController
-            let editTransmissionServiceViewController = editTransmissionServiceNavigationController.viewControllers.first as! EditTransmissionServiceViewController
+            let editTransmissionServiceViewController = editTransmissionServiceNavigationController.viewControllers.first as! EditTransmissionServiceTableViewController
 
             editTransmissionServiceViewController.transmissionService = self.selectedTransmissionService
 

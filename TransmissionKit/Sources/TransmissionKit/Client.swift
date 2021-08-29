@@ -9,7 +9,7 @@
 import Foundation
 
 public final class Client {
-    public enum ClientError: Swift.Error {
+    public enum ClientError: Error {
         case badTag
         case badIdentifier
         case authenticationFailed
@@ -20,6 +20,7 @@ public final class Client {
     public let port: String
     public var identifier: String?
     public let credentials: Credentials?
+
     let urlSession: URLSession
 
     public init(host: String, port: String, credentials: Credentials?, urlSession: URLSession) {

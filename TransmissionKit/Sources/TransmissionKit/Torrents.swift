@@ -190,4 +190,86 @@ public enum Torrents {
     public static func stopTorrents(ids: TorrentSet?) -> Request<StopTorrentsRequest, None> {
         return Request<StopTorrentsRequest, None>(method: "torrent-stop", arguments: StopTorrentsRequest(ids: ids))
     }
+
+//    public struct SetTorrentsPriorityHighRequest: Encodable {
+//        let ids: TorrentSet?
+//        let files: [Int]
+//
+//        public enum  CodingKeys: String, CodingKey {
+//            case ids = "ids"
+//            case files = "priority-high"
+//        }
+//    }
+//
+//    public static func setTorrentsPriorityHigh(ids: TorrentSet?, files: [Int]) -> Request<SetTorrentsPriorityHighRequest, None> {
+//        return Request<SetTorrentsPriorityHighRequest, None>(method: "torrent-set", arguments: SetTorrentsPriorityHighRequest(ids: ids, files: files))
+//    }
+
+    public struct SetTorrentsUploadLimitedRequest: Encodable {
+        let ids: TorrentSet?
+        let uploadLimited: Bool
+    }
+
+    public static func setTorrentsUploadLimited(limited: Bool) -> Request<SetTorrentsUploadLimitedRequest, None> {
+        return self.setTorrentsUploadLimited(ids: nil, limited: limited)
+    }
+
+    public static func setTorrentUploadLimited(id: TorrentIdentifier, limited: Bool) -> Request<SetTorrentsUploadLimitedRequest, None> {
+        return self.setTorrentsUploadLimited(ids: .identifiers([id]), limited: limited)
+    }
+
+    public static func setTorrentsUploadLimited(ids: TorrentSet?, limited: Bool) -> Request<SetTorrentsUploadLimitedRequest, None> {
+        return Request<SetTorrentsUploadLimitedRequest, None>(method: "torrent-set", arguments: SetTorrentsUploadLimitedRequest(ids: ids, uploadLimited: limited))
+    }
+
+    public struct SetTorrentsDownloadLimitedRequest: Encodable {
+        let ids: TorrentSet?
+        let downloadLimited: Bool
+    }
+
+    public static func setTorrentsDownloadLimited(limited: Bool) -> Request<SetTorrentsDownloadLimitedRequest, None> {
+        return self.setTorrentsDownloadLimited(ids: nil, limited: limited)
+    }
+
+    public static func setTorrentDownloadLimited(id: TorrentIdentifier, limited: Bool) -> Request<SetTorrentsDownloadLimitedRequest, None> {
+        return self.setTorrentsDownloadLimited(ids: .identifiers([id]), limited: limited)
+    }
+
+    public static func setTorrentsDownloadLimited(ids: TorrentSet?, limited: Bool) -> Request<SetTorrentsDownloadLimitedRequest, None> {
+        return Request<SetTorrentsDownloadLimitedRequest, None>(method: "torrent-set", arguments: SetTorrentsDownloadLimitedRequest(ids: ids, downloadLimited: limited))
+    }
+
+    public struct SetTorrentsUploadLimitRequest: Encodable {
+        let ids: TorrentSet?
+        let uploadLimit: Int
+    }
+
+    public static func setTorrentsUploadLimit(limit: Int) -> Request<SetTorrentsUploadLimitRequest, None> {
+        return self.setTorrentsUploadLimit(ids: nil, limit: limit)
+    }
+
+    public static func setTorrentUploadLimited(id: TorrentIdentifier, limit: Int) -> Request<SetTorrentsUploadLimitRequest, None> {
+        return self.setTorrentsUploadLimit(ids: .identifiers([id]), limit: limit)
+    }
+
+    public static func setTorrentsUploadLimit(ids: TorrentSet?, limit: Int) -> Request<SetTorrentsUploadLimitRequest, None> {
+        return Request<SetTorrentsUploadLimitRequest, None>(method: "torrent-set", arguments: SetTorrentsUploadLimitRequest(ids: ids, uploadLimit: limit))
+    }
+
+    public struct SetTorrentsDownloadLimitRequest: Encodable {
+        let ids: TorrentSet?
+        let downloadLimit: Int
+    }
+
+    public static func setTorrentsDownloadLimit(limit: Int) -> Request<SetTorrentsDownloadLimitRequest, None> {
+        return self.setTorrentsDownloadLimit(ids: nil, limit: limit)
+    }
+
+    public static func setTorrentDownloadLimited(id: TorrentIdentifier, limit: Int) -> Request<SetTorrentsDownloadLimitRequest, None> {
+        return self.setTorrentsDownloadLimit(ids: .identifiers([id]), limit: limit)
+    }
+
+    public static func setTorrentsDownloadLimit(ids: TorrentSet?, limit: Int) -> Request<SetTorrentsDownloadLimitRequest, None> {
+        return Request<SetTorrentsDownloadLimitRequest, None>(method: "torrent-set", arguments: SetTorrentsDownloadLimitRequest(ids: ids, downloadLimit: limit))
+    }
 }

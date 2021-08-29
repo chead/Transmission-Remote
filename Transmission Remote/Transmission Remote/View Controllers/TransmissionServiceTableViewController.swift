@@ -52,7 +52,7 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
 
         self.searchController.searchResultsUpdater = self
         self.searchController.obscuresBackgroundDuringPresentation = false
-        self.searchController.searchBar.placeholder = "Search Titles"
+        self.searchController.searchBar.placeholder = "Search Torrents"
 
         self.navigationItem.searchController = searchController
 
@@ -63,6 +63,12 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
         self.view.addSubview(activityIndicator)
 
         self.refreshTorrents()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.searchController.isActive = false
     }
 
     // MARK: - Table view data source
@@ -150,10 +156,6 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
             transmissionTorrentTableViewController.transmissionTorrent = self.selectedTransmissionTorrent
 
             break
-//            let addTransmissionServiceNavigationController = segue.destination as! UINavigationController
-//            let addTransmissionServiceViewController = addTransmissionServiceNavigationController.viewControllers.first as! AddTransmissionServiceViewController
-//
-//            addTransmissionServiceViewController.managedObjectContext = self.fetchedResultsController.managedObjectContext
 
         default:
             break

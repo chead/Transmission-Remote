@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import TransmissionKit
 
-class EditTransmissionServiceViewController: UIViewController {
+class EditTransmissionServiceTableViewController: UITableViewController {
     var transmissionService: TransmissionService!
 
     @IBOutlet var nameTextField: UITextField!
