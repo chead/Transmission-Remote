@@ -39,12 +39,19 @@ public class TransmissionTorrent: NSManagedObject {
     @NSManaged var progress: Float
     @NSManaged var service: TransmissionService
     @NSManaged var status: Status
+    @NSManaged var files: Set<TransmissionFile>
 
     convenience init(torrent: Torrent, service: TransmissionService, managedObjectContext: NSManagedObjectContext) {
         guard let transmissionTorrentEntity = NSEntityDescription.entity(forEntityName: "TransmissionTorrent", in: managedObjectContext)
         else { fatalError("Failed to initialize NSEntityDescription: TransmissionTorrent") }
 
         self.init(entity: transmissionTorrentEntity, insertInto: managedObjectContext)
+
+        for file in torrent.files {
+            let transmissionFile = TransmissionFile(file: file, torrent: self, managedObjectContext: managedObjectContext)
+
+            self.files.insert(transmissionFile)
+        }
 
         self.setFields(torrent: torrent, service: service)
     }
