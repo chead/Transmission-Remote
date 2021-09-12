@@ -10,15 +10,16 @@ import UIKit
 import CoreData
 import TransmissionKit
 
-class TransmissionServiceTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class TransmissionSessionTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
-    var transmissionService: TransmissionService!
+    var transmissionSession: TransmissionSession!
 
     let searchController = UISearchController(searchResultsController: nil)
 
     private var filteredTransmissionTorrents: [TransmissionTorrent] = []
+
     private var selectedTransmissionTorrent: TransmissionTorrent!
 
     private var isFiltering: Bool { return searchController.isActive && !(searchController.searchBar.text?.isEmpty ?? true) }
@@ -26,11 +27,11 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
     lazy var fetchedResultsController: NSFetchedResultsController<TransmissionTorrent> = {
         let transmissionTorrentsFetchRequest: NSFetchRequest<TransmissionTorrent> = NSFetchRequest(entityName: "TransmissionTorrent")
 
-        transmissionTorrentsFetchRequest.predicate = NSPredicate(format: "service == %@", self.transmissionService)
+        transmissionTorrentsFetchRequest.predicate = NSPredicate(format: "service == %@", self.transmissionSession.transmissionService)
         transmissionTorrentsFetchRequest.sortDescriptors = [NSSortDescriptor(key: "added", ascending: false)]
 
         var fetchedResultsController = NSFetchedResultsController(fetchRequest: transmissionTorrentsFetchRequest,
-                                                                  managedObjectContext: self.transmissionService.managedObjectContext!,
+                                                                  managedObjectContext: self.transmissionSession.transmissionService.managedObjectContext!,
                                                                   sectionNameKeyPath: nil,
                                                                   cacheName: nil)
 
@@ -118,12 +119,16 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
         switch type {
         case .insert:
             tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+
         case .delete:
             tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+
         case .move:
             break
+
         case .update:
             break
+
         @unknown default:
             fatalError()
         }
@@ -133,12 +138,16 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
         switch type {
         case .insert:
             tableView.insertRows(at: [newIndexPath!], with: .fade)
+
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .fade)
+
         case .update:
             tableView.reloadRows(at: [indexPath!], with: .fade)
+
         case .move:
             tableView.moveRow(at: indexPath!, to: newIndexPath!)
+
         @unknown default:
             fatalError()
         }
@@ -153,6 +162,7 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
         case "showTransmissionTorrentTableViewController":
             let transmissionTorrentTableViewController = segue.destination as! TransmissionTorrentTableViewController
 
+            transmissionTorrentTableViewController.transmissionSession = self.transmissionSession
             transmissionTorrentTableViewController.transmissionTorrent = self.selectedTransmissionTorrent
 
             break
@@ -173,7 +183,7 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
     }
 
     func refreshTorrents() {
-        self.transmissionService.refreshTorrents() {
+        self.transmissionSession.getTorrents() {
             DispatchQueue.main.async{
                 self.activityIndicator.stopAnimating()
             }
@@ -210,7 +220,7 @@ class TransmissionServiceTableViewController: UITableViewController, NSFetchedRe
     }
 }
 
-extension TransmissionServiceTableViewController: UISearchResultsUpdating {
+extension TransmissionSessionTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = self.searchController.searchBar
 
@@ -218,15 +228,15 @@ extension TransmissionServiceTableViewController: UISearchResultsUpdating {
     }
 }
 
-extension TransmissionServiceTableViewController: UIDocumentPickerDelegate {
+extension TransmissionSessionTableViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        guard let torrentURL = urls.first else { return }
-
-        self.transmissionService.addTorrent(url: torrentURL) { (added) in
-            if(added == true) {
-                self.refreshTorrents()
-            }
-        }
+//        guard let torrentURL = urls.first else { return }
+//
+//        self.transmissionService.addTorrent(url: torrentURL) { (added) in
+//            if(added == true) {
+//                self.refreshTorrents()
+//            }
+//        }
     }
 
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {}

@@ -19,7 +19,7 @@ class TransmissionServicesTableViewController: UITableViewController, NSFetchedR
         let transissionServersFetchRequest: NSFetchRequest<TransmissionService> = NSFetchRequest(entityName: "TransmissionService")
 
         transissionServersFetchRequest.sortDescriptors = [NSSortDescriptor(key: "created", ascending: true)]
-        
+
         var fetchedResultsController = NSFetchedResultsController(fetchRequest: transissionServersFetchRequest,
                                                                   managedObjectContext: self.managedObjectContext,
                                                                   sectionNameKeyPath: nil,
@@ -113,9 +113,12 @@ class TransmissionServicesTableViewController: UITableViewController, NSFetchedR
             editTransmissionServiceViewController.transmissionService = self.selectedTransmissionService
 
         case "showTransmissionTorrentsTableViewController":
-            let transmissionServiceTableViewController = segue.destination as! TransmissionServiceTableViewController
+            let transmissionServiceTableViewController = segue.destination as! TransmissionSessionTableViewController
+            let credentials = TransmissionCredentials.getCredentials(uuid: self.selectedTransmissionService!.uuid)
+            let client = TransmissionClient(credentials: credentials)
+            let session = TransmissionSession(transmissionClient: client, transmissionService: self.selectedTransmissionService!)
 
-            transmissionServiceTableViewController.transmissionService = self.selectedTransmissionService
+            transmissionServiceTableViewController.transmissionSession = session
 
         default:
             break
@@ -123,5 +126,4 @@ class TransmissionServicesTableViewController: UITableViewController, NSFetchedR
     }
 
     @IBAction func unwindToTransmissionServicesTableViewController(segue: UIStoryboardSegue) { }
-
 }

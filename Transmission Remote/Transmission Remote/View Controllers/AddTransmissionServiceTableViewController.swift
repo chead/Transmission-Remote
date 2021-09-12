@@ -60,7 +60,9 @@ class AddTransmissionServiceTableViewController: UITableViewController {
             username.isEmpty == false,
             password.isEmpty == false
         {
-            transmissionService.addCredentials(username: username, password: password)
+            let credentials = TransmissionCredentials(username: username, password: password)
+
+            let _ = TransmissionCredentials.addCredentials(credentials: credentials, uuid: transmissionService.uuid)
         }
 
         self.dismiss(animated: true) {}

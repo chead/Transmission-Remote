@@ -84,91 +84,91 @@ public class TransmissionTorrent: NSManagedObject {
     }
 
     func start(completion: @escaping (Bool) -> Void) {
-        self.service.client.make(request: Torrents.startTorrent(id: .id(id))) { (result) in
-            switch result {
-            case .success(_):
-                completion(true)
-            case .failure(_):
-                completion(false)
-            }
-        }
+//        self.service.client.make(request: Torrents.startTorrent(id: .id(id))) { (result) in
+//            switch result {
+//            case .success(_):
+//                completion(true)
+//            case .failure(_):
+//                completion(false)
+//            }
+//        }
     }
 
     func stop(completion: @escaping (Bool) -> Void) {
-        self.service.client.make(request: Torrents.stopTorrent(id: .id(id))) { (result) in
-            switch result {
-            case .success(_):
-                completion(true)
-            case .failure(_):
-                completion(false)
-            }
-        }
+//        self.service.client.make(request: Torrents.stopTorrent(id: .id(id))) { (result) in
+//            switch result {
+//            case .success(_):
+//                completion(true)
+//            case .failure(_):
+//                completion(false)
+//            }
+//        }
     }
 
     func uploadLimited(limited: Bool, completion: @escaping (Bool) -> Void) {
-        self.service.client.make(request: Torrents.setTorrentsUploadLimited(limited: limited)) { (result) in
-            switch result {
-            case .success(_):
-                completion(true)
-            case .failure(_):
-                completion(false)
-            }
-        }
+//        self.service.client.make(request: Torrents.setTorrentsUploadLimited(limited: limited)) { (result) in
+//            switch result {
+//            case .success(_):
+//                completion(true)
+//            case .failure(_):
+//                completion(false)
+//            }
+//        }
     }
 
     func downloadLimited(limited: Bool, completion: @escaping (Bool) -> Void) {
-        self.service.client.make(request: Torrents.setTorrentsDownloadLimited(limited: limited)) { (result) in
-            switch result {
-            case .success(_):
-                completion(true)
-            case .failure(_):
-                completion(false)
-            }
-        }
+//        self.service.client.make(request: Torrents.setTorrentsDownloadLimited(limited: limited)) { (result) in
+//            switch result {
+//            case .success(_):
+//                completion(true)
+//            case .failure(_):
+//                completion(false)
+//            }
+//        }
     }
 
     func uploadLimit(limit: Int, completion: @escaping (Bool) -> Void) {
-        self.service.client.make(request: Torrents.setTorrentsUploadLimit(limit: limit)) { (result) in
-            switch result {
-            case .success(_):
-                completion(true)
-            case .failure(_):
-                completion(false)
-            }
-        }
+//        self.service.client.make(request: Torrents.setTorrentsUploadLimit(limit: limit)) { (result) in
+//            switch result {
+//            case .success(_):
+//                completion(true)
+//            case .failure(_):
+//                completion(false)
+//            }
+//        }
     }
 
     func downloadLimit(limit: Int, completion: @escaping (Bool) -> Void) {
-        self.service.client.make(request: Torrents.setTorrentsDownloadLimit(limit: limit)) { (result) in
-            switch result {
-            case .success(_):
-                completion(true)
-            case .failure(_):
-                completion(false)
-            }
-        }
+//        self.service.client.make(request: Torrents.setTorrentsDownloadLimit(limit: limit)) { (result) in
+//            switch result {
+//            case .success(_):
+//                completion(true)
+//            case .failure(_):
+//                completion(false)
+//            }
+//        }
     }
 
     func update(completion: @escaping () -> Void) {
-        self.service.client.make(request: Torrents.getTorrent(id: .id(id))) { (result) in
-            switch result {
-            case .success(let result):
-                guard let remoteTorrent = result.arguments.torrents.first else { break }
-
-                self.setFields(torrent: remoteTorrent, service: self.service)
-
-                do {
-                    try self.managedObjectContext!.save()
-                } catch {
-                    fatalError("Failed to save NSManagedObjectContext: \(error.localizedDescription)")
-                }
-
-                break
-            case .failure(_):
-                break
-            }
-
-            completion()
-        }
+//        self.service.client.make(request: Torrents.getTorrent(id: .id(id))) { (result) in
+//            switch result {
+//            case .success(let result):
+//                guard let remoteTorrent = result.arguments.torrents.first else { break }
+//
+//                self.setFields(torrent: remoteTorrent, service: self.service)
+//
+//                do {
+//                    try self.managedObjectContext!.save()
+//                } catch {
+//                    fatalError("Failed to save NSManagedObjectContext: \(error.localizedDescription)")
+//                }
+//
+//                break
+//            case .failure(_):
+//                break
+//            }
+//
+//            completion()
+//        }
     }
 }

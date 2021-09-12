@@ -47,7 +47,7 @@
         <!--Torrents-->
         <scene sceneID="7Pi-TM-EDB">
             <objects>
-                <tableViewController id="jnS-vQ-srL" customClass="TransmissionServiceTableViewController" customModule="Transmission_Remote" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="jnS-vQ-srL" customClass="TransmissionSessionTableViewController" customModule="Transmission_Remote" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="W08-gT-mNz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -414,6 +414,7 @@
                         <outlet property="uploadRateLabel" destination="S40-ky-aeM" id="6YV-tk-F4x"/>
                         <segue destination="QgB-kW-CoP" kind="show" identifier="showTransmissionTorrentPriorityPickerTableViewController" id="rV0-NF-rrk"/>
                         <segue destination="i40-Ek-pVN" kind="show" identifier="showTransmissionTorrentLimitsPickerTableViewController" id="tfP-tV-Rcd"/>
+                        <segue destination="fp9-ap-Aw1" kind="show" identifier="showTransmissionFilesTableViewController" id="55s-e3-h3F"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qba-hv-jKh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -602,6 +603,69 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qjq-cj-USQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3835" y="1270"/>
+        </scene>
+        <!--Files-->
+        <scene sceneID="h4q-Hk-G0R">
+            <objects>
+                <tableViewController id="fp9-ap-Aw1" customClass="TransmissionFilesTableViewController" customModule="Transmission_Remote" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Asy-p7-ZdX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="transmissionFileTableViewCell" rowHeight="64" id="ONp-w7-8p5" customClass="TransmissionFilesTableViewCell" customModule="Transmission_Remote" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="24.5" width="414" height="64"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ONp-w7-8p5" id="Yg7-YC-eHY">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u8H-Lo-g8V">
+                                            <rect key="frame" x="345" y="16.5" width="51" height="31"/>
+                                            <connections>
+                                                <action selector="activeSwitchValueChangedWithSender:" destination="ONp-w7-8p5" eventType="valueChanged" id="84s-yf-3vA"/>
+                                            </connections>
+                                        </switch>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Yo4-tE-1lJ">
+                                            <rect key="frame" x="20" y="16" width="309" height="32.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBx-Du-Y9K">
+                                                    <rect key="frame" x="0.0" y="0.0" width="309" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qVI-a4-blF">
+                                                    <rect key="frame" x="0.0" y="28.5" width="309" height="4"/>
+                                                </progressView>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Yo4-tE-1lJ" firstAttribute="centerY" secondItem="Yg7-YC-eHY" secondAttribute="centerY" id="2CN-CV-BPf"/>
+                                        <constraint firstItem="u8H-Lo-g8V" firstAttribute="centerY" secondItem="Yg7-YC-eHY" secondAttribute="centerY" id="RcG-Nx-06v"/>
+                                        <constraint firstItem="u8H-Lo-g8V" firstAttribute="leading" secondItem="Yo4-tE-1lJ" secondAttribute="trailing" constant="16" id="eYy-U0-uUF"/>
+                                        <constraint firstItem="Yo4-tE-1lJ" firstAttribute="leading" secondItem="Yg7-YC-eHY" secondAttribute="leadingMargin" id="hkk-Bb-tRS"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="u8H-Lo-g8V" secondAttribute="trailing" id="qCz-K0-tgw"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="activeSwitch" destination="u8H-Lo-g8V" id="8EY-r4-86X"/>
+                                    <outlet property="nameLabel" destination="gBx-Du-Y9K" id="XBo-p0-b8o"/>
+                                    <outlet property="progressView" destination="qVI-a4-blF" id="N71-t4-xJn"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="fp9-ap-Aw1" id="OOA-oD-n3k"/>
+                            <outlet property="delegate" destination="fp9-ap-Aw1" id="7xg-Fw-LVN"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Files" id="NY9-J1-GYr"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YDF-bM-OjJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3834.7826086956525" y="1982.8125"/>
         </scene>
         <!--Priority-->
         <scene sceneID="rnV-8i-4QI">

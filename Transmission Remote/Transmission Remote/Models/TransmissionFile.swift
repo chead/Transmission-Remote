@@ -14,6 +14,8 @@ import TransmissionKit
 
 public class TransmissionFile: NSManagedObject {
     @NSManaged var name: String
+    @NSManaged var size: Int
+    @NSManaged var progress: Float
     @NSManaged var torrent: TransmissionTorrent
 
     convenience init(file: Torrent.File, torrent: TransmissionTorrent, managedObjectContext: NSManagedObjectContext) {
@@ -23,6 +25,9 @@ public class TransmissionFile: NSManagedObject {
         self.init(entity: transmissionFileEntity, insertInto: managedObjectContext)
 
         self.name = file.name
+        self.size = file.length
+        self.progress = Float(file.bytesCompleted)/Float(file.length)
+
         self.torrent = torrent
     }
 }

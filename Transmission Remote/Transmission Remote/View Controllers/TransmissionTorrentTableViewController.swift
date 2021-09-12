@@ -10,6 +10,7 @@ import UIKit
 
 class TransmissionTorrentTableViewController: UITableViewController, TransmissionTorrentPriorityPickerDelegate, TransmissionTorrentLimitsPickerDelegate {
 
+    var transmissionSession: TransmissionSession!
     var transmissionTorrent: TransmissionTorrent!
 
     @IBOutlet var nameLabel: UILabel!
@@ -54,16 +55,22 @@ class TransmissionTorrentTableViewController: UITableViewController, Transmissio
         switch self.transmissionTorrent.status {
         case .stopped:
             self.statusLabel.text = "Stopped"
+
         case .checkingQueued:
             self.statusLabel.text = "Checking Queued"
+
         case .checking:
             self.statusLabel.text = "Checking"
+
         case .downloadingQueued:
             self.statusLabel.text = "Downloading Queued"
+
         case .downloading:
             self.statusLabel.text = "Downloading"
+
         case .seedingQueued:
             self.statusLabel.text = "Seeding Queued"
+
         case .seeding:
             self.statusLabel.text = "Seeding"
         }
@@ -81,7 +88,7 @@ class TransmissionTorrentTableViewController: UITableViewController, Transmissio
     }
 
     @IBAction func startButtonTapped(sender: UIBarButtonItem) {
-        self.transmissionTorrent.start { (started) in
+        self.transmissionSession.startTorrent(id: self.transmissionTorrent.id) { started in
             DispatchQueue.main.async {
                 self.setStartStopButtons(started: started)
             }
@@ -89,7 +96,7 @@ class TransmissionTorrentTableViewController: UITableViewController, Transmissio
     }
 
     @IBAction func pauseButtonTapped(sender: UIBarButtonItem) {
-        self.transmissionTorrent.stop { (stopped) in
+        self.transmissionSession.stopTorrent(id: self.transmissionTorrent.id) { stopped in
             DispatchQueue.main.async {
                 self.setStartStopButtons(started: !stopped)
             }
@@ -98,17 +105,25 @@ class TransmissionTorrentTableViewController: UITableViewController, Transmissio
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
-        case 0: break
+        case 0:
+            break
+
         case 1:
             switch indexPath.row {
             case 0:
                 self.performSegue(withIdentifier: "showTransmissionTorrentPriorityPickerTableViewController", sender: self)
-                break
+
             case 1:
                 self.performSegue(withIdentifier: "showTransmissionTorrentLimitsPickerTableViewController", sender: self)
+
+            case 3:
+                self.performSegue(withIdentifier: "showTransmissionFilesTableViewController", sender: self)
+
                 break
+
             default: break
             }
+
         default: break
         }
     }
@@ -138,8 +153,6 @@ class TransmissionTorrentTableViewController: UITableViewController, Transmissio
 
             transmissionTorrentPriorityPickerTableViewController.delegate = self
 
-            break
-
         case "showTransmissionTorrentLimitsPickerTableViewController":
             let transmissionTorrentLimitsPickerTableViewController = segue.destination as! TransmissionTorrentLimitsPickerTableViewController
 
@@ -149,7 +162,10 @@ class TransmissionTorrentTableViewController: UITableViewController, Transmissio
             transmissionTorrentLimitsPickerTableViewController.uploadLimit = self.transmissionTorrent.uploadLimit
             transmissionTorrentLimitsPickerTableViewController.downloadLimit = self.transmissionTorrent.downloadLimit
 
-            break
+        case "showTransmissionFilesTableViewController":
+            let transmissionFilesTableViewController = segue.destination as! TransmissionFilesTableViewController
+
+            transmissionFilesTableViewController.transmissionFiles = self.transmissionTorrent.files
 
         default:
             break

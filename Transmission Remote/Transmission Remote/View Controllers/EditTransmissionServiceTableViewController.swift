@@ -65,7 +65,9 @@ class EditTransmissionServiceTableViewController: UITableViewController {
             username.isEmpty == false,
             password.isEmpty == false
         {
-            self.transmissionService.udpateCredentials(username: username, password: password)
+            let credentials = TransmissionCredentials(username: username, password: password)
+
+            let _ = TransmissionCredentials.updateCredentials(credentials: credentials, uuid: transmissionService.uuid)
         }
 
         self.dismiss(animated: true) {}

@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C21935C326ED6FD60043C43C /* TransmissionFilesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21935C226ED6FD60043C43C /* TransmissionFilesTableViewController.swift */; };
+		C21935C526ED77D20043C43C /* TransmissionFilesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21935C426ED77D20043C43C /* TransmissionFilesTableViewCell.swift */; };
 		C21DC10B2518546E008E4ED6 /* TransmissionTorrentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21DC10A2518546E008E4ED6 /* TransmissionTorrentTableViewController.swift */; };
 		C23D02CC2492EB7D00B5D598 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D02CB2492EB7D00B5D598 /* LandingViewController.swift */; };
+		C23D998226DE982A00514CD8 /* TransmissionCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23D998126DE982A00514CD8 /* TransmissionCredentials.swift */; };
 		C24A103D245C994E0023D242 /* Transmission_Remote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C24A103B245C994E0023D242 /* Transmission_Remote.xcdatamodeld */; };
 		C251B3732244541500B2AA04 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C251B3722244541500B2AA04 /* AppDelegate.swift */; };
 		C251B3782244541500B2AA04 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C251B3762244541500B2AA04 /* Main.storyboard */; };
@@ -20,12 +23,14 @@
 		C266E52C2503614F002E35DA /* TransmissionTorrentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C266E52B2503614F002E35DA /* TransmissionTorrentsTableViewCell.swift */; };
 		C266E57625097405002E35DA /* EditTransmissionServiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C266E57525097405002E35DA /* EditTransmissionServiceTableViewController.swift */; };
 		C270A32D245127C500A1629B /* TransmissionServicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C270A32C245127C500A1629B /* TransmissionServicesTableViewController.swift */; };
-		C270A32F245127CE00A1629B /* TransmissionServiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C270A32E245127CE00A1629B /* TransmissionServiceTableViewController.swift */; };
+		C270A32F245127CE00A1629B /* TransmissionSessionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C270A32E245127CE00A1629B /* TransmissionSessionTableViewController.swift */; };
 		C288164324F8AF9A002DFC9C /* AddTransmissionServiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288164224F8AF9A002DFC9C /* AddTransmissionServiceTableViewController.swift */; };
 		C288164824FA0952002DFC9C /* TransmissionKit in Frameworks */ = {isa = PBXBuildFile; productRef = C288164724FA0952002DFC9C /* TransmissionKit */; };
 		C2BF7A7524FE06D9005C0258 /* TransmissionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF7A7424FE06D9005C0258 /* TransmissionService.swift */; };
 		C2BF7A7724FE0818005C0258 /* TransmissionTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF7A7624FE0818005C0258 /* TransmissionTorrent.swift */; };
 		C2CA9B7426DC38C100E39CB0 /* TransmissionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CA9B7326DC38C100E39CB0 /* TransmissionFile.swift */; };
+		C2CA9BA726DE8E2900E39CB0 /* TransmissionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CA9BA626DE8E2900E39CB0 /* TransmissionClient.swift */; };
+		C2CA9BA926DE8E3C00E39CB0 /* TransmissionSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CA9BA826DE8E3C00E39CB0 /* TransmissionSession.swift */; };
 		C2F59FA226D5652500A58355 /* TransmissionTorrentPriorityPickerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F59FA126D5652500A58355 /* TransmissionTorrentPriorityPickerTableViewController.swift */; };
 		C2F59FA426D59CAD00A58355 /* TransmissionTorrentLimitsPickerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F59FA326D59CAD00A58355 /* TransmissionTorrentLimitsPickerTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -61,8 +66,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C21935C226ED6FD60043C43C /* TransmissionFilesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionFilesTableViewController.swift; sourceTree = "<group>"; };
+		C21935C426ED77D20043C43C /* TransmissionFilesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionFilesTableViewCell.swift; sourceTree = "<group>"; };
 		C21DC10A2518546E008E4ED6 /* TransmissionTorrentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionTorrentTableViewController.swift; sourceTree = "<group>"; };
 		C23D02CB2492EB7D00B5D598 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
+		C23D998126DE982A00514CD8 /* TransmissionCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionCredentials.swift; sourceTree = "<group>"; };
 		C24A103C245C994E0023D242 /* Transmission_Remote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Transmission_Remote.xcdatamodel; sourceTree = "<group>"; };
 		C251B36F2244541500B2AA04 /* Transmission Remote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Transmission Remote.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C251B3722244541500B2AA04 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,11 +88,13 @@
 		C266E52B2503614F002E35DA /* TransmissionTorrentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionTorrentsTableViewCell.swift; sourceTree = "<group>"; };
 		C266E57525097405002E35DA /* EditTransmissionServiceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTransmissionServiceTableViewController.swift; sourceTree = "<group>"; };
 		C270A32C245127C500A1629B /* TransmissionServicesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionServicesTableViewController.swift; sourceTree = "<group>"; };
-		C270A32E245127CE00A1629B /* TransmissionServiceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionServiceTableViewController.swift; sourceTree = "<group>"; };
+		C270A32E245127CE00A1629B /* TransmissionSessionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionSessionTableViewController.swift; sourceTree = "<group>"; };
 		C288164224F8AF9A002DFC9C /* AddTransmissionServiceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransmissionServiceTableViewController.swift; sourceTree = "<group>"; };
 		C2BF7A7424FE06D9005C0258 /* TransmissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionService.swift; sourceTree = "<group>"; };
 		C2BF7A7624FE0818005C0258 /* TransmissionTorrent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionTorrent.swift; sourceTree = "<group>"; };
 		C2CA9B7326DC38C100E39CB0 /* TransmissionFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionFile.swift; sourceTree = "<group>"; };
+		C2CA9BA626DE8E2900E39CB0 /* TransmissionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionClient.swift; sourceTree = "<group>"; };
+		C2CA9BA826DE8E3C00E39CB0 /* TransmissionSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionSession.swift; sourceTree = "<group>"; };
 		C2F59FA126D5652500A58355 /* TransmissionTorrentPriorityPickerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionTorrentPriorityPickerTableViewController.swift; sourceTree = "<group>"; };
 		C2F59FA326D59CAD00A58355 /* TransmissionTorrentLimitsPickerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionTorrentLimitsPickerTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -115,6 +125,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C21935C026ED60720043C43C /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				C266E52725033C42002E35DA /* Keychain.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		C21935C126ED60830043C43C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C266E52B2503614F002E35DA /* TransmissionTorrentsTableViewCell.swift */,
+				C21935C426ED77D20043C43C /* TransmissionFilesTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C21935C626ED86630043C43C /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				C251B3762244541500B2AA04 /* Main.storyboard */,
+				C251B37E2244541800B2AA04 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		C251B3662244541400B2AA04 = {
 			isa = PBXGroup;
 			children = (
@@ -140,13 +176,12 @@
 			isa = PBXGroup;
 			children = (
 				C2F59FA026D4924400A58355 /* Models */,
+				C21935C126ED60830043C43C /* Views */,
 				C2F59F9F26D4921C00A58355 /* View Controllers */,
-				C266E52B2503614F002E35DA /* TransmissionTorrentsTableViewCell.swift */,
-				C266E52725033C42002E35DA /* Keychain.swift */,
+				C21935C626ED86630043C43C /* Storyboards */,
+				C21935C026ED60720043C43C /* Utilities */,
 				C251B3722244541500B2AA04 /* AppDelegate.swift */,
-				C251B3762244541500B2AA04 /* Main.storyboard */,
 				C251B37C2244541800B2AA04 /* Assets.xcassets */,
-				C251B37E2244541800B2AA04 /* LaunchScreen.storyboard */,
 				C251B3812244541800B2AA04 /* Info.plist */,
 				C24A103B245C994E0023D242 /* Transmission_Remote.xcdatamodeld */,
 			);
@@ -185,8 +220,9 @@
 				C288164224F8AF9A002DFC9C /* AddTransmissionServiceTableViewController.swift */,
 				C266E57525097405002E35DA /* EditTransmissionServiceTableViewController.swift */,
 				C270A32C245127C500A1629B /* TransmissionServicesTableViewController.swift */,
-				C270A32E245127CE00A1629B /* TransmissionServiceTableViewController.swift */,
+				C270A32E245127CE00A1629B /* TransmissionSessionTableViewController.swift */,
 				C21DC10A2518546E008E4ED6 /* TransmissionTorrentTableViewController.swift */,
+				C21935C226ED6FD60043C43C /* TransmissionFilesTableViewController.swift */,
 				C2F59FA126D5652500A58355 /* TransmissionTorrentPriorityPickerTableViewController.swift */,
 				C2F59FA326D59CAD00A58355 /* TransmissionTorrentLimitsPickerTableViewController.swift */,
 			);
@@ -196,6 +232,9 @@
 		C2F59FA026D4924400A58355 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C2CA9BA626DE8E2900E39CB0 /* TransmissionClient.swift */,
+				C23D998126DE982A00514CD8 /* TransmissionCredentials.swift */,
+				C2CA9BA826DE8E3C00E39CB0 /* TransmissionSession.swift */,
 				C2BF7A7424FE06D9005C0258 /* TransmissionService.swift */,
 				C2BF7A7624FE0818005C0258 /* TransmissionTorrent.swift */,
 				C2CA9B7326DC38C100E39CB0 /* TransmissionFile.swift */,
@@ -351,11 +390,16 @@
 				C251B3732244541500B2AA04 /* AppDelegate.swift in Sources */,
 				C2F59FA426D59CAD00A58355 /* TransmissionTorrentLimitsPickerTableViewController.swift in Sources */,
 				C23D02CC2492EB7D00B5D598 /* LandingViewController.swift in Sources */,
-				C270A32F245127CE00A1629B /* TransmissionServiceTableViewController.swift in Sources */,
+				C21935C326ED6FD60043C43C /* TransmissionFilesTableViewController.swift in Sources */,
+				C270A32F245127CE00A1629B /* TransmissionSessionTableViewController.swift in Sources */,
 				C2CA9B7426DC38C100E39CB0 /* TransmissionFile.swift in Sources */,
+				C2CA9BA926DE8E3C00E39CB0 /* TransmissionSession.swift in Sources */,
 				C266E52C2503614F002E35DA /* TransmissionTorrentsTableViewCell.swift in Sources */,
+				C23D998226DE982A00514CD8 /* TransmissionCredentials.swift in Sources */,
 				C266E52825033C42002E35DA /* Keychain.swift in Sources */,
 				C266E57625097405002E35DA /* EditTransmissionServiceTableViewController.swift in Sources */,
+				C21935C526ED77D20043C43C /* TransmissionFilesTableViewCell.swift in Sources */,
+				C2CA9BA726DE8E2900E39CB0 /* TransmissionClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
