@@ -27,19 +27,20 @@ class TransmissionTorrentTableViewController: UITableViewController, Transmissio
         super.viewDidLoad()
 
         self.setFields()
+
         self.setStartStopButtons(started: self.transmissionTorrent.status != .stopped)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.refreshTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { (timer) in
-            self.transmissionTorrent.update {
-                DispatchQueue.main.async {
-                    self.setFields()
-                }
-            }
-        }
+//        self.refreshTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { (timer) in
+//            self.transmissionTorrent.update {
+//                DispatchQueue.main.async {
+//                    self.setFields()
+//                }
+//            }
+//        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -50,6 +51,7 @@ class TransmissionTorrentTableViewController: UITableViewController, Transmissio
 
     func setFields() {
         self.nameLabel.text = self.transmissionTorrent.name
+
         self.progressLabel.text = String(format: "%.02f", arguments: [(self.transmissionTorrent.progress * 100)])
 
         switch self.transmissionTorrent.status {

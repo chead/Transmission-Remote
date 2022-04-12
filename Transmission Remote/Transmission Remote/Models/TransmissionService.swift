@@ -18,7 +18,7 @@ public class TransmissionService: NSManagedObject {
     @NSManaged var port: String
     @NSManaged var created: Date
     @NSManaged var uuid: UUID
-    @NSManaged var torrents: [TransmissionTorrent]
+//    @NSManaged var torrents: [TransmissionTorrent]
 
 //    lazy var client: Client = {
 //        var credentials: Credentials?

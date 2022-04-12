@@ -56,6 +56,14 @@ class TransmissionFilesTableViewController: UITableViewController, TransmissionF
         return self.transmissionFiles.sorted { $0.name.lowercased() < $1.name.lowercased() }[indexPath.row]
     }
 
+    func activeSwitchValueChanged(sender: UISwitch!, in cell: TransmissionFilesTableViewCell) {
+        let indexPath = self.tableView.indexPath(for: cell)
+
+        let transmissionFile = transmissionFile(for: indexPath!)
+
+
+    }
+
     /*
     // MARK: - Navigation
 
@@ -66,7 +74,5 @@ class TransmissionFilesTableViewController: UITableViewController, TransmissionF
     }
     */
 
-    func activeSwitchValueChanged(sender: UISwitch!, in cell: TransmissionFilesTableViewCell) {
-        
-    }
+
 }

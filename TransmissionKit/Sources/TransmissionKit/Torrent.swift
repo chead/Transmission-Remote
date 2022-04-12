@@ -91,7 +91,7 @@ public struct Torrent {
         public let lastScrapeStartTime: Int
         public let lastScrapeSucceeded: Bool
         public let lastScrapeTime: Int
-        public let lastScrapeTimedOut: Int //Bool
+        public let lastScrapeTimedOut: Bool //Bool
         public let leecherCount: Int
         public let nextAnnounceTime: Int
         public let nextScrapeTime: Int

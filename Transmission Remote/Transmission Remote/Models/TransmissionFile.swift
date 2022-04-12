@@ -10,24 +10,14 @@ import Foundation
 import CoreData
 import TransmissionKit
 
-@objc(TransmissionFile)
+public struct TransmissionFile: Hashable {
+    var name: String
+    var size: Int
+    var progress: Float
 
-public class TransmissionFile: NSManagedObject {
-    @NSManaged var name: String
-    @NSManaged var size: Int
-    @NSManaged var progress: Float
-    @NSManaged var torrent: TransmissionTorrent
-
-    convenience init(file: Torrent.File, torrent: TransmissionTorrent, managedObjectContext: NSManagedObjectContext) {
-        guard let transmissionFileEntity = NSEntityDescription.entity(forEntityName: "TransmissionFile", in: managedObjectContext)
-        else { fatalError("Failed to initialize NSEntityDescription: TransmissionTorrent") }
-
-        self.init(entity: transmissionFileEntity, insertInto: managedObjectContext)
-
+    init(file: Torrent.File) {
         self.name = file.name
         self.size = file.length
         self.progress = Float(file.bytesCompleted)/Float(file.length)
-
-        self.torrent = torrent
     }
 }

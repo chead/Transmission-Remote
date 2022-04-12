@@ -10,11 +10,7 @@ import Foundation
 import CoreData
 import TransmissionKit
 
-@objc(TransmissionTorrent)
-
-public class TransmissionTorrent: NSManagedObject {
-    @objc(Status)
-
+public class TransmissionTorrent {
     enum Status: Int32 {
         case stopped = 0
         case checkingQueued
@@ -25,43 +21,39 @@ public class TransmissionTorrent: NSManagedObject {
         case seeding
     }
 
-    @NSManaged var id: Int
-    @NSManaged var hashString: String
-    @NSManaged var name: String
-    @NSManaged var added: Date
-    @NSManaged var activity: Date
-    @NSManaged var downloadLimit: Int
-    @NSManaged var downloadLimited: Bool
-    @NSManaged var downloadRate: Int
-    @NSManaged var uploadLimit: Int
-    @NSManaged var uploadLimited: Bool
-    @NSManaged var uploadRate: Int
-    @NSManaged var progress: Float
-    @NSManaged var service: TransmissionService
-    @NSManaged var status: Status
-    @NSManaged var files: Set<TransmissionFile>
+    var id: Int
+    var hashString: String
+    var name: String
+    var added: Date
+    var activity: Date
+    var downloadLimit: Int
+    var downloadLimited: Bool
+    var downloadRate: Int
+    var uploadLimit: Int
+    var uploadLimited: Bool
+    var uploadRate: Int
+    var progress: Float
+//    var service: TransmissionService
+    var status: Status
+    var files: Set<TransmissionFile>
 
-    convenience init(torrent: Torrent, service: TransmissionService, managedObjectContext: NSManagedObjectContext) {
-        guard let transmissionTorrentEntity = NSEntityDescription.entity(forEntityName: "TransmissionTorrent", in: managedObjectContext)
-        else { fatalError("Failed to initialize NSEntityDescription: TransmissionTorrent") }
+    init(torrent: Torrent/*, service: TransmissionService*/) {
+//        guard let transmissionTorrentEntity = NSEntityDescription.entity(forEntityName: "TransmissionTorrent", in: managedObjectContext)
+//        else { fatalError("Failed to initialize NSEntityDescription: TransmissionTorrent") }
 
-        self.init(entity: transmissionTorrentEntity, insertInto: managedObjectContext)
+//        self.init(entity: transmissionTorrentEntity, insertInto: managedObjectContext)
 
         for file in torrent.files {
-            let transmissionFile = TransmissionFile(file: file, torrent: self, managedObjectContext: managedObjectContext)
-
-            self.files.insert(transmissionFile)
+//            let transmissionFile = TransmissionFile(file: file, torrent: self, managedObjectContext: managedObjectContext)
+//
+//            self.files.insert(transmissionFile)
         }
 
-        self.setFields(torrent: torrent, service: service)
-    }
-
-    private func setFields(torrent: Torrent, service: TransmissionService) {
         self.id = torrent.id
         self.hashString = torrent.hashString
         self.name = torrent.name
         self.progress = torrent.percentDone
-        self.service = service
+//        self.service = service
         self.added = torrent.addedDate
         self.activity = torrent.activityDate
 
@@ -81,6 +73,7 @@ public class TransmissionTorrent: NSManagedObject {
         self.uploadLimit = torrent.uploadLimit
         self.uploadLimited = torrent.uploadLimited
         self.uploadRate = torrent.rateUpload
+        self.files = []
     }
 
     func start(completion: @escaping (Bool) -> Void) {

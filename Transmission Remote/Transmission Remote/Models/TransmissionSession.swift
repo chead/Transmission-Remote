@@ -28,29 +28,17 @@ class TransmissionSession {
         self.transmissionService = transmissionService
     }
 
-    func getTorrents(completion: @escaping () -> Void) {
+    func getTorrents(completion: @escaping (Result<[TransmissionTorrent], Error>) -> Void) {
         self.client.make(request: Torrents.getTorrents()) { (result) in
             switch result {
             case .success(let result):
-                for localTorrent in self.transmissionService.torrents {
-                    self.transmissionService.managedObjectContext?.delete(localTorrent)
-                }
+                let transmissionTorrents = result.arguments.torrents.map { TransmissionTorrent(torrent: $0) }
 
-                for remoteTorrent in result.arguments.torrents {
-                    let _ = TransmissionTorrent(torrent: remoteTorrent, service: self.transmissionService, managedObjectContext: self.transmissionService.managedObjectContext!)
-                }
-
-                do {
-                    try self.transmissionService.managedObjectContext!.save()
-                } catch {
-                    fatalError("Failed to save NSManagedObjectContext: \(error.localizedDescription)")
-                }
+                completion(.success(transmissionTorrents))
 
             case .failure(let error):
-                print("\(error.localizedDescription)")
+                completion(.failure(error))
             }
-
-            completion()
         }
     }
 

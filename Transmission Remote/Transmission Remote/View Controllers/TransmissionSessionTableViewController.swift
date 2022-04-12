@@ -11,6 +11,10 @@ import CoreData
 import TransmissionKit
 
 class TransmissionSessionTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+    enum TransmissionTorrentFilter {
+        case all
+        case downloading
+    }
 
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
@@ -18,38 +22,22 @@ class TransmissionSessionTableViewController: UITableViewController, NSFetchedRe
 
     let searchController = UISearchController(searchResultsController: nil)
 
-    private var filteredTransmissionTorrents: [TransmissionTorrent] = []
+    private var transmissionTorrents: [TransmissionTorrent] = []
+
+    private var searchedTransmissionTorrents: [TransmissionTorrent] = []
 
     private var selectedTransmissionTorrent: TransmissionTorrent!
 
-    private var isFiltering: Bool { return searchController.isActive && !(searchController.searchBar.text?.isEmpty ?? true) }
+    private var currentFilter: TransmissionTorrentFilter = .all
 
-    lazy var fetchedResultsController: NSFetchedResultsController<TransmissionTorrent> = {
-        let transmissionTorrentsFetchRequest: NSFetchRequest<TransmissionTorrent> = NSFetchRequest(entityName: "TransmissionTorrent")
-
-        transmissionTorrentsFetchRequest.predicate = NSPredicate(format: "service == %@", self.transmissionSession.transmissionService)
-        transmissionTorrentsFetchRequest.sortDescriptors = [NSSortDescriptor(key: "added", ascending: false)]
-
-        var fetchedResultsController = NSFetchedResultsController(fetchRequest: transmissionTorrentsFetchRequest,
-                                                                  managedObjectContext: self.transmissionSession.transmissionService.managedObjectContext!,
-                                                                  sectionNameKeyPath: nil,
-                                                                  cacheName: nil)
-
-        fetchedResultsController.delegate = self
-
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            fatalError("Failed to initialize FetchedResultsController: \(error)")
-        }
-
-        return fetchedResultsController
-    }()
+    private var isSearching: Bool { return searchController.isActive && !(searchController.searchBar.text?.isEmpty ?? true) }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.definesPresentationContext = true
+
+        self.navigationController?.setToolbarHidden(false, animated: false)
 
         self.searchController.searchResultsUpdater = self
         self.searchController.obscuresBackgroundDuringPresentation = false
@@ -63,7 +51,7 @@ class TransmissionSessionTableViewController: UITableViewController, NSFetchedRe
 
         self.view.addSubview(activityIndicator)
 
-        self.refreshTorrents()
+        self.refreshTorrents {}
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -75,19 +63,13 @@ class TransmissionSessionTableViewController: UITableViewController, NSFetchedRe
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        if(isFiltering) {
-            return 1
-        } else {
-            return self.fetchedResultsController.sections!.count
-        }
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(isFiltering) {
-            return self.filteredTransmissionTorrents.count
-        } else {
-            return self.fetchedResultsController.sections![section].numberOfObjects
-        }
+        return self.isSearching ?
+            self.searchedTransmissionTorrents.count :
+            self.transmissionTorrents.count
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -97,7 +79,9 @@ class TransmissionSessionTableViewController: UITableViewController, NSFetchedRe
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "transmissionTorrentTableViewCell", for: indexPath) as! TransmissionTorrentsTableViewCell
 
-        let transmissionTorrent = self.transmissionTorrent(for: indexPath)
+        let transmissionTorrent = self.isSearching ?
+            self.searchedTransmissionTorrents[indexPath.row] :
+            self.transmissionTorrents[indexPath.row]
 
         cell.titleLabel.text = transmissionTorrent.name
         cell.progressView.progress = transmissionTorrent.progress
@@ -106,55 +90,15 @@ class TransmissionSessionTableViewController: UITableViewController, NSFetchedRe
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.selectedTransmissionTorrent = self.transmissionTorrent(for: indexPath)
+        self.selectedTransmissionTorrent = self.isSearching ?
+            self.searchedTransmissionTorrents[indexPath.row] :
+            self.transmissionTorrents[indexPath.row]
 
         self.performSegue(withIdentifier: "showTransmissionTorrentTableViewController", sender: self)
     }
 
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
-    }
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        switch type {
-        case .insert:
-            tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
-
-        case .delete:
-            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
-
-        case .move:
-            break
-
-        case .update:
-            break
-
-        @unknown default:
-            fatalError()
-        }
-    }
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
-        case .insert:
-            tableView.insertRows(at: [newIndexPath!], with: .fade)
-
-        case .delete:
-            tableView.deleteRows(at: [indexPath!], with: .fade)
-
-        case .update:
-            tableView.reloadRows(at: [indexPath!], with: .fade)
-
-        case .move:
-            tableView.moveRow(at: indexPath!, to: newIndexPath!)
-
-        @unknown default:
-            fatalError()
-        }
-    }
-
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        self.tableView.endUpdates()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -165,58 +109,89 @@ class TransmissionSessionTableViewController: UITableViewController, NSFetchedRe
             transmissionTorrentTableViewController.transmissionSession = self.transmissionSession
             transmissionTorrentTableViewController.transmissionTorrent = self.selectedTransmissionTorrent
 
-            break
-
         default:
             break
         }
     }
 
-    func filterTorrentsByTitle(title: String) {
-        guard let fetchedObjects = self.fetchedResultsController.fetchedObjects else { return }
+    func transmissionTorrent(indexPath: IndexPath) -> TransmissionTorrent {
+        if(self.isSearching) {
+            return self.searchedTransmissionTorrents[indexPath.row]
+        }
+        else {
+            return self.searchedTransmissionTorrents[indexPath.row]
+        }
+    }
 
-        self.filteredTransmissionTorrents = fetchedObjects.filter({ (transmissionTorrent) -> Bool in
+    func searchTorrentsByTitle(title: String) {
+        self.searchedTransmissionTorrents = self.transmissionTorrents.filter({ (transmissionTorrent) -> Bool in
             return transmissionTorrent.name.lowercased().contains(title.lowercased())
         })
 
         self.tableView.reloadData()
     }
 
-    func refreshTorrents() {
-        self.transmissionSession.getTorrents() {
+    func refreshTorrents(completion: @escaping () -> Void) {
+        self.transmissionSession.getTorrents { result in
+            switch result {
+            case .success(let torrents):
+                self.transmissionTorrents = torrents.sorted { $0.added < $1.added }
+
+            case .failure(let error):
+                break
+            }
+
             DispatchQueue.main.async{
                 self.activityIndicator.stopAnimating()
+
+                self.tableView.reloadData()
+
+                completion()
             }
         }
     }
 
-    func transmissionTorrent(for indexPath: IndexPath) -> TransmissionTorrent {
-        let transmissionTorrent: TransmissionTorrent
-
-        if(self.isFiltering == true) {
-            transmissionTorrent = self.filteredTransmissionTorrents[indexPath.row]
-        } else {
-            transmissionTorrent = self.fetchedResultsController.object(at: indexPath)
-        }
-
-        return transmissionTorrent
-    }
-
     @objc func pulledToRefresh(refreshControl: UIRefreshControl) {
-        guard self.isFiltering == false else { return }
+        guard self.isSearching == false else { return }
 
-        self.refreshTorrents()
-
-        refreshControl.endRefreshing()
+        self.refreshTorrents {
+            refreshControl.endRefreshing()
+        }
     }
 
     @IBAction func addTorrentBarButtonItemPressed(sender: UIBarButtonItem) {
-        let documentPickerViewController = UIDocumentPickerViewController(documentTypes: ["public.data"], in: .import)
+//        let documentPickerViewController = UIDocumentPickerViewController(documentTypes: ["public.data"], in: .import)
+//
+//        documentPickerViewController.delegate = self
+//        documentPickerViewController.modalPresentationStyle = .fullScreen
+//
+//        self.present(documentPickerViewController, animated: true, completion: nil)
+    }
 
-        documentPickerViewController.delegate = self
-        documentPickerViewController.modalPresentationStyle = .fullScreen
+    @IBAction func filterBarButtonItemPressed(sender: UIBarButtonItem) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        self.present(documentPickerViewController, animated: true, completion: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+
+        actionSheet.addAction(cancelAction)
+
+        let allAction = UIAlertAction(title: "All", style: .default) { action in
+            self.currentFilter = .all
+        }
+
+        actionSheet.addAction(allAction)
+
+        let downloadingAction = UIAlertAction(title: "Downloading", style: .default) { action in
+            self.currentFilter = .downloading
+        }
+
+        actionSheet.addAction(downloadingAction)
+
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+
+    @IBAction func sortBarButtonItemPressed(sender: UIBarButtonItem) {
+
     }
 }
 
@@ -224,7 +199,7 @@ extension TransmissionSessionTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = self.searchController.searchBar
 
-        self.filterTorrentsByTitle(title: searchBar.text!)
+        self.searchTorrentsByTitle(title: searchBar.text!)
     }
 }
 
